@@ -1,5 +1,44 @@
 # 100 Days Of Code - Log
 
+### Day 4: September 5, 2019
+
+**Today's Progress**
+
+After an awesome video call with a Data Engineer in Canberra today, he inspired me just to dive in and leave the theory for when I need it, though the last few days has been really interesting.
+
+His suggestion was to start with the [Intro to Machine Learning](http://course18.fast.ai/lessonsml1/lesson1.html) course.
+
+For this to be useful you need to get the tooling up and running. I have used AWS' Sagemaker before so am semi familar with it. I am on a Mac so the following will be Mac instructions.
+
+Here are the instructions I sort of followed to setup my environment [https://forums.fast.ai/t/wiki-thread-lesson-1/6825]()
+
+Here are the high level bits:
+
+Install conda for python env management
+https://www.anaconda.com/distribution/
+
+git clone https://github.com/fastai/fastai
+cd fastai
+conda create -n fastai python=3.6 anaconda
+conda env update
+conda activate fastai
+
+Once you are able to do that, you should be able to run `jupyter notebook`. `jupyter` is like an editor where you put python code, load in your data and start manipulating, traning and validating your module. A browser will open up and you should be able to be able to browse to the fastai directory.
+
+Go to `fastai/courses/ml1` and open up `lesson1-rf.ipynb`. You should be able to then run the python code though there will be errors.
+
+Follow [this](https://medium.com/@GuruAtWork/fast-ai-lesson-1-7fc38e978d37) article and it will sort it.
+
+So I am super stoke because I went through the first lesson and was able to load in and display (in raw format) my own dataset, the one that I may use for my project! So heaps of progress today.
+
+**Thoughts:**
+
+After a number of conversations this week it has been made really clear to me that I just need to jump head first in, go deep and try and figure it out, trial and error. I am pretty happy that only after 4 days I am starting to use the tooling on my own data. You never know, I may have a v1 model done in another couple of weeks which would be amazing.
+
+**Link to work/resources:**
+
+None
+
 ### Day 3: September 4, 2019
 
 **Today's Progress**
