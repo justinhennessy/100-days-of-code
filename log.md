@@ -1,5 +1,50 @@
 # 100 Days Of Code - Log
 
+### Day 6: September 7, 2019
+
+**Today's Progress**
+
+Completed lesson 2 [course](http://course18.fast.ai/lessonsml1/lesson2.html) on intro to machine learning. Incredibly interesting stuff around `Random Forests` and to be honest, I think I need to stop the lessons now and start to have a play. I have some data to work on that is contextual to my work so that is going to be super interesting. Part of this lesson shows ways of how to ploy and visualise both graphs and decision trees and gave some great recommendations on "defaults" for some of the `Hyperparameters` or tuning variables.
+
+Here is a big of a dump of interesting bits of note:
+
+When `Bagging` you can do a couple of sampling methods, `Row` and `Column` sampling:
+
+`Row`
+
+- this takes a random subset of data (in our case with replacement) and creates a tree, it tests binary splits with all features (aka column)
+
+`Column`
+
+- uses a random subset of rows as above
+- also introduces the use of a random subset of features when doing the binary splits instead of all features, helps with speed BUT also helps to make each tree less correlated
+
+In this course there is a `Hyperparameter` called `max_features`, what this does is to determine, when doing a binary slip how often it should do a binary split and test all features or select from a random subset of features. So if you set `max_features` to `0.5`, this means when it comes to a binary split, 50% of the time it will use the full feature set and 50% of the time it will take a random subset of features (how many can be configured)
+
+Good values to try for `max_features` is 0.5, 1, log2 and square root (see code documention on how to do that, its in the course).
+
+`out-of-bag` or `OOB` - this is actually really cool, it allows you, for each tree, to automatically create a validation set of data from the rows that werent used in that tree to be used as a validation set. You can then average the those results, the idea being to get close to your R<sup>2</sup> value, ie your prediction, just another way to see if your experiments are headed in the right direction.
+
+`number of estimators` (aka `trees`) - this is another `Hyperparameter` and allows you to set a small number when experiementing but then set large numbers for long running training efforts, another method of speeding up the experimentation process.
+
+`Uncorrelated trees` - are those that give totally different predictions to each other. This is why the average of a bunch of dumb tress is better because the ensumble model (the combination of multiple trees) is likely to generalise (ie predict) better.
+
+`Grid Search`
+
+- allows you to pass in a list of `Hyperparameters`
+- pass in a range of values for those `Hyperparameters`
+- this enables the model to auto tune itself
+
+`min_samples_leaf`
+
+- this sets how many samples you want left when it gets to the bottom of each tree
+- some good values to try 3, 5, 10, 25
+- used to speed up the process
+
+**Thoughts:**
+
+**Link to work/resources:**
+
 ### Day 5: September 6, 2019
 
 **Today's Progress**
