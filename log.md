@@ -5,6 +5,30 @@
 - What do I do with date fields that have no values? how do I default them?
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 
+### Day 8: September 9, 2019
+
+**Today's Progress**
+
+Today was very much a play day with my own dataset. I have created my own `jupyter notebook` and used the lesson1 notebook from the Intro to ML from fast.ai as a template.
+
+My first run looks like it was abismal, my R<sup>2</sup> result was 1 or 0.99.
+
+Below is a plot from the first 10 of my Random Forests:
+
+![](images/graph.png)
+
+What is pretty cool though, is I have it running through all of the transforms and it actually makes it through the Random Forest Regressor process. I am currently making the assumption this is broken as I was expecting a nice curveup towards 1.0, not starting at 1.0. :)
+
+I am also visualising one of the decision trees and it only had 1 binary split which I am not sure why that is, something to continue investigating tomorrow.
+
+**Thoughts:**
+
+I dont have definitive proof yet but I am fairly sure my model is broken the graph doesn't look right and the R<sup>2</sup> is too high. I am pretty happy with where I am at but I suspect I am going to have to watch the lesson 1 and 2 courses again to try and get a better understanding on what I am doing.
+
+**Link to work/resources:**
+
+None
+
 ### Day 7: September 8, 2019
 
 **Today's Progress**
