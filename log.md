@@ -1,5 +1,45 @@
 # 100 Days Of Code - Log
 
+### Questions to Answer
+
+- What do I do with date fields that have no values? how do I default them?
+- Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
+
+### Day 7: September 8, 2019
+
+**Today's Progress**
+
+As mentioned yesterday, today is a practical day. I spent 30mins setting up home machine to be able to run `jupyter notebook` using my most excellent setup instructions which worked a treat. :)
+
+I have defined what `jupyter notebook` is so here is the definition from there site:
+
+`"The Jupyter Notebook is an open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text."`
+
+It was created (as I understand it) for acedemia to share research including working code. It is incredibly powerful and a very cool way to do exploratory research into your data and document your thinking as you go.
+
+I spent most of the day just working with my own data set, going over what I had learnt in lessons 1 and 2 from the intro to ML course. Most of my time was spent starting the (what now looks like) long process of preprocessing my data getting it ready for the random tree method. I am sure I am doing a heap of things wrong and way too manually but for the moment, it is so I can understand what is going on in the background so progress has been super slow.
+
+I spend a heap of time in `jupyter notebook` so quickly looked up shortcuts and found a good article [here](https://towardsdatascience.com/jypyter-notebook-shortcuts-bf0101a98330).
+
+The ones I have found useful so far:
+
+`shift + enter` - runs a line in the notebook
+
+`option + enter` - runs a line and inserts a new line below
+
+`d, d` - ie press d twice, this deletes the cell you are on in the notebook
+
+
+If you want to see what a command does, just prepend it with `??` ie `??proc_df` will give you a command man page plus its code. If you just want the man page just use a single `?`.
+
+**Thoughts:**
+
+Super slow progress today, didn't learn anything new, just setup my iMac environment to match that of my laptop, which was good because I found some gaps in my install instructions. I wanted to start to play with data that I know so that I can put things into context. I didn't get anywhere near running my data through the random forest and suspect I have another couple of days before that is the case.
+
+**Link to work/resources:**
+
+None
+
 ### Day 6: September 7, 2019
 
 **Today's Progress**
@@ -94,17 +134,48 @@ Here are the high level bits:
 Install conda for python env management
 https://www.anaconda.com/distribution/
 
+```
 git clone https://github.com/fastai/fastai
 cd fastai
 conda create -n fastai python=3.6 anaconda
 conda env update
 conda activate fastai
+```
 
 Once you are able to do that, you should be able to run `jupyter notebook`. `jupyter` is like an editor where you put python code, load in your data and start manipulating, traning and validating your module. A browser will open up and you should be able to be able to browse to the fastai directory.
+
+The data for lesson one can be found [here](https://www.kaggle.com/c/bluebook-for-bulldozers/data), click the `Download All` button, that will download a .zip file which contains a bunch of files, find Train.zip and unzip it, the Train.csv is what you will need for lesson 1.
 
 Go to `fastai/courses/ml1` and open up `lesson1-rf.ipynb`. You should be able to then run the python code though there will be errors.
 
 Follow [this](https://medium.com/@GuruAtWork/fast-ai-lesson-1-7fc38e978d37) article and it will sort it.
+
+Here are the commands from the above article you need to run, I suggest reading it anyway incase you already have some of the steps installed already:
+
+UPDATE: I found I had some symlink issues so I had to do the following to get it working on one of my macs, happy for someone to give me a better solution but this worked.
+
+`ln -s /Users/justinhennessy/anaconda3/envs/fastai/bin/pip /Users/justinhennessy/anaconda3/envs/fastai/bin/pip3.6`
+
+`conda list | grep bcolz`
+if ^ returns nothing run `conda install -c anaconda bcolz`
+
+```
+conda update -n base conda
+pip install opencv-python
+pip install graphviz
+pip install sklearn_pandas
+pip install isoweek
+pip install pandas_summary
+pip install torchtext
+pip install feather-format 
+pip install jupyter_contrib_nbextensions
+pip install plotnine 
+pip install docrepr
+pip install awscli
+pip install kaggle-cli
+pip install pdpbox
+pip install seaborn
+```
 
 So I am super stoke because I went through the first lesson and was able to load in and display (in raw format) my own dataset, the one that I may use for my project! So heaps of progress today.
 
