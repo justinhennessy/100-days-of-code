@@ -5,6 +5,42 @@
 - What do I do with date fields that have no values? how do I default them?
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 
+### Day 9: September 10, 2019
+
+**Today's Progress**
+
+Another practical day but felt super productive becase I am starting to get a hand of some of the tooling around pre processing the data. Because ML needs numbers for everything, you need to be able to quickly get a dataset in good shape so you can start doing EDA  (Exploritory Data Analysis) on it.
+
+The more I dig I realise that data pre processing is both a very important by time consuming exercise, learning all the enhanced ways to fix that is going to be critical to be able to do some speedy experiments.
+
+Here are a few learnings:
+
+`add_datepart(df_raw, 'date_field_name')` - this is a function from the fastai library and essentually breaks up a date (for all rows) into a heap of different parts like year, month, day, dayofyear, isendofmonth etc, super powerful.
+
+`df_raw.columns` - if you want to look at a pandas (another python library) dataframe's columns
+
+`train_cats(data_frame)` - Another fastai function to change any columns of strings in a panda's dataframe to a column of categorical values
+
+`df_raw.nps = df_raw.nps.fillna(np.nanmean(df_raw.nps))` - this takes a field in a dataframe, looks for `NaN` values and fills them with the `mean` of the column, really useful for quickly filling in missing data.
+
+`RandomForestRegressor(n_estimators=1, max_depth=3, bootstrap=False, n_jobs=-1)` - this command was used to generate the visualisation below of a single, deterministic decision tree. `n_estimators` is how many trees you want it to generate. `max_depth` is how deep do you want the tree to be (in this case its 3 levels). `bootstrap` this turns off and on random columns, in this case it makes our tree deterministic and lastly `n_jobs`, this is for paralellising processing of trees (ie controls how much CPU is used), `-1` defaults to 10 trees at a time.
+
+So after a heap of playing I was able to visualise one of my decision trees:
+
+![](images/decision_tree.png)
+
+and also get a much better graph of 1 to 140 tree averages:
+
+![](images/decision_tree_average_graph.png)
+
+**Thoughts:**
+
+As mentioned, data processing looks like it is a massive part of the whole process so having tools that can quickly get data into a useable state, not perfect, so that you can start looking at the data is critical. I felt really productive and am looking forward to learning more ways to speed up the experimentation process.
+
+**Link to work/resources:**
+
+[jupyter notebook cheatsheet PDF](https://www.cheatography.com/weidadeyue/cheat-sheets/jupyter-notebook/pdf/)
+
 ### Day 8: September 9, 2019
 
 **Today's Progress**
