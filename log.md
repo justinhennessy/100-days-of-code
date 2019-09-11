@@ -4,6 +4,43 @@
 
 - What do I do with date fields that have no values? how do I default them?
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
+- How can I feed in new data into a model and it show me the results per row?
+
+### Day 10: September 11, 2019
+
+**Today's Progress**
+
+Another "slow" day, I suspect the pre processing and fiddling is going to be happening for quite a few days. I am continuing to build up my own dataset and getting use to all the different tools to prepare the data to be run through the Random Forest Regressor.
+
+Here are some random things I learnt through the day:
+
+When creating a model, allocate 3 types of data:
+
+- Training
+- Validation
+- Test
+
+The key is to keep the Test dataset unseen until you think you are finished your model, this is to ensure you dont overfit the data which can happen to validation data.
+
+`df[df.is_suspended > 0]` - if you want to output certain values from a dataframe field
+
+`df_raw.describe(include='all')` - this gives you some aggregated information about your data. `first`/`last` shows you the oldest and newest for dates, this means you can compare dates between your training, validation and test datasets. It also gives you the mean and percentiles for numeric values.
+
+When experimenting, use recent data in your dataset.
+
+When using `train_cats` (a function to create numeric values for category fields), to ensure that you use the same categories across your training and validation sets, use `apply_cats(validation_set, training_set)`.
+
+`%prun` - put this in front of any command and it will profile the command and show you where all the time is being spent, helps identify slow parts
+ 
+ `df_raw.sort_values(by=['field_name'])` - this is how you sort rows in a dataframe by a particular field.
+
+`out-of-bag` - is used to create validation sets on the flu, it users rows that were not used to train a tree. This is good for small datasets.
+
+If the standard diviation of the average between trees is high, this means the `mean` (ie "predictions") are further apart from each other.
+
+`bootstrape=false` - this is a parameter you can pass into the RandomForestRegressor function, it turns of randomly select fields to split, it makes it deterministic.
+
+When dealing with time data, try and make your training and test datasets from different periods.
 
 ### Day 9: September 10, 2019
 
