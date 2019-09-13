@@ -6,6 +6,49 @@
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 - How can I feed in new data into a model and it show me the results per row?
 - Why should I use the log of a value instead of the actual value when training and compariing data (ie like sale price)
+- What is a dendrogram?
+- What is Rank correlation? and what is monotonic data?
+- What is a univariate relationships?
+
+### Day 12: September 13, 2019
+
+**Today's Progress**
+
+I started on lesson 4 today, feature importance and tree interpreter, and I suspect I am going to need quite a few days to use what is in this lesson.
+
+Here are some random things I noted:
+
+When removing redundant columns, you may remove columns that have collinear relationships. 
+
+[Collinearity](https://youtu.be/-2N5aCawArM) - two columns related to each other. Removing columns that have co will not make your tree any less predictive. If you have columns related to each other, they can share importance, once removed it often clears up your importance graph.
+
+The depth of a decision tree can be calculated (assuming the final level has leaves with 1 sample in them): log2(n), n = number of samples
+
+The last level of the tree will have n leaves, so the smaller the sample the less decisions can be made, less rich for predictions, smaller samples overfit less but is overall less accurate, less binary choices.
+
+Two things you want to do when building a model using bagging, each tree/estimator as accurate as possible, across the estimators the correlation is as low as possible, so that when you average things out you get good generalisation. Smaller samples decreases the power of the estimator and increasing the correlation.
+
+There are 2 reasons why your validation score (or mean square error) are terrible. If your overfitting, the r2 score of the OOB dataset will get worse.
+
+If your sample size is small and you can’t use OOB, create another random validation set. 
+
+If OOB or your random validation set gets worse, you must be overfitting.
+
+Second reason, if there is a huge change of attributes or behaviour between training and validation that could explain bad validation results.
+
+`one hot encoding` - when changing categories into codes, you can just change each string value to a number, one hot encoding splits each category into its own column which has a value or 1 or 0. It might improve discovering correlation between it and other fields. Used for columns that has small number of unique values. Use `max_n_cat=x` when using proc_df to automatically split columns into separate Boolean “is_category name”, x is the number over which it will not do this, x being the unique category count in a field.
+
+“Levels” in a category column can also be referred to as cardinality, or number of unique values.
+
+Some recommendations on tuning the Random Forest Regressor:
+
+max_features=0.5 to get more varied trees, 50% of the time it will choose a random field for the next decision point
+
+min_samples_leaf=1,3,5,10 etc until result gets worse.
+
+**Thoughts:**
+
+**Link to work/resources:**
 
 ### Day 11: September 12, 2019
 
