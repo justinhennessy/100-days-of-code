@@ -10,6 +10,30 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 13: September 14, 2019
+
+**Today's Progress**
+
+Today's journey started on the path of learning about feature importance, something that looks very exciting, more because it looks like it will start to give me tools to validate what I am seeing through my model. The biggest issue at the moment is I am not sure what I am looking at, my model says I am 90% accurate but of what?! and is that try. The dataset that I am work on is very small so I think that is part of the issue. I still haven't got a feel for what a good sized training and validation set looks like. There are some techniques for small sets that I haven't employed yet, that is tomorrows job.
+
+So, feature importance begins to show us which features (ie columns) have the most impact on the result. Below is an example of a plot which shows how that looks:
+
+![](images/feature_importance_graph.png)
+
+Another cool visualisation is a dendrogram, which is essentially a tree diagram showing relationships between features:
+
+![](images/dendrogram.png)
+
+I suspect like data pre-processing, I am going to need a few days on this to try and get as much useful info out with the view to validating my model.
+
+**Thoughts:**
+
+I am still struggling with understanding what I am seeing, it is easy to copy and paste code from the lessons and get something out but its a whole another world to understand what I am looking at. This will be my task over the next week, try and get to a point where I am confident with what I am looking at.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 12: September 13, 2019
 
 **Today's Progress**

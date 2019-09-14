@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm ~/Code/fastai/data/churn.csv || true; mv ~/Downloads/ML\ Project\ -\ Full\ customer\ list\ -\ Useful.csv ~/Code/fastai/data/churn.csv
