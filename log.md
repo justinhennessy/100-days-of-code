@@ -10,7 +10,36 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 - Why is OOB results lower than your model?
-- What is Temporal order? 
+- What is Temporal order?
+
+### Day 16: September 17, 2019
+
+**Today's Progress**
+
+Continued through [lesson 5](http://course18.fast.ai/lessonsml1/lesson5.html) on Extrapolation. There is an interesting concepted called a tree interpreter which shows you the +/- delta a feature has on the prediction. When coupled with a waterfall plot:
+
+![](images/waterfall_plot.png)
+(example from the fastai course)
+
+This can give us a good idea as to what impact each feature has on the predicted outcome of the dependant variable.
+
+There was also discussion around if you have a big difference between your validation and OOB scores, this often being that you need to handle temporal data better, ie be mindful of past, current and future dates in the context of predicting your dependant variable. I haven't got a method to mitigate that yet but it is something I will now take into consideration when looking at my different data sets.
+
+There was also a plotting method mentioned that compared the results from of 5 models using your validation and test sets, you then plot those results (ie predictions of the dependant variable), test set on the Y axis and validation on the X:
+
+![](images/comparison_test_validation_graph.jpg)
+
+The idea being you are looking to try and show a linear relationship, this gives good indications that your model is able to generalise well.
+
+Some good advise from the lecturer, better to find out if your model(s) generalise in testing rather than production when they can have real world impact, very sound advise I think. :) I will give this method a try at some point as it looks really useful.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
 
 ### Day 15: September 16, 2019
 
@@ -20,11 +49,7 @@ Pretty slow day, finalised [lesson 4](http://course18.fast.ai/lessonsml1/lesson4
 
 One thing I did learn was around Cross Validation.
 
-
-
 Cross validation is not so good with temporal data (ie things with time in it) and according to the fastai people you should use it sparingly.
-
-
 
 Method:
 
