@@ -9,6 +9,42 @@
 - What is a dendrogram?
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
+- Why is OOB results lower than your model?
+- What is Temporal order? 
+
+### Day 15: September 16, 2019
+
+**Today's Progress**
+
+Pretty slow day, finalised [lesson 4](http://course18.fast.ai/lessonsml1/lesson4.html) on feature important and started watching [lesson 5](http://course18.fast.ai/lessonsml1/lesson5.html) on Extrapolation. Nothing of note today.
+
+One thing I did learn was around Cross Validation.
+
+
+
+Cross validation is not so good with temporal data (ie things with time in it) and according to the fastai people you should use it sparingly.
+
+
+
+Method:
+
+ - this randomly shuffles your data and splits it into X number of groups
+
+- for the first model, it takes the first group of data as a validation set and the rest as a training set
+
+- for the second model, it takes the second group of data as a validation set and then rest as training
+
+- this continues until you have X number of models
+
+- it then takes the averages of the results and this gives you a prediction of your dependant variable you can "cross reference" with you test set (the dataset you leave until last to confirm your model generalises ok)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
 
 ### Day 14: September 15, 2019
 
