@@ -6,11 +6,27 @@
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 - How can I feed in new data into a model and it show me the results per row?
 - Why should I use the log of a value instead of the actual value when training and compariing data (ie like sale price)
-- What is a dendrogram?
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 - Why is OOB results lower than your model?
-- What is Temporal order?
+
+### Day 17: September 18, 2019
+
+**Today's Progress**
+
+Not too much progress today, just wiping a little egg off the face as I realised I was using the completely wrong approach for my side project! I have not issue declaring it because this is why I am here, to learn. :)
+
+So I have discovered it doesn't matter too much what method you need to use (ie Regression or Classification), a heap of steps are the same which is hugely encouraging. I feel really confident now on the pre-processing side of things, obviously I have a huge way to go but I understand the intent of what we are trying to do in that phase.
+
+I have rerun all my data using a RandomForestClassifier, which has new "scores" I need to get across ie f1 and accuracy, and currently the model is too accurate. "Data Leakage" seems to be a pretty systemic problem I have had so far, something I need to dig into more.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
 
 ### Day 16: September 17, 2019
 
