@@ -8,7 +8,70 @@
 - Why should I use the log of a value instead of the actual value when training and compariing data (ie like sale price)
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
-- Why is OOB results lower than your model?
+
+### Day 18: September 19, 2019
+
+**Today's Progress**
+
+Continued my way throught the fastai [lesson 5 - Extrapolation and Random Forest from scratch](http://course18.fast.ai/lessonsml1/lesson5.html) and [lesson 6 - Data products and living code](http://course18.fast.ai/lessonsml1/lesson6.html). There was not a heap of new things just more discussion about what had already been covered from lessons 1-5, which was good to get a few more views on what it was we were looking to do and why we were doing it.
+
+In lesson 6, the lecturer mentioned an article he wrote around [Designing great data products](https://www.oreilly.com/radar/drivetrain-approach-data-products/) which covered his method of developing and working with data, super interesting.
+
+Today was has also been very much about levelling up my Python Fu. Below is just some random bits and pieces which I found useful.
+
+List comprehension
+This was a little technique I thought was useful in Python, just a nicer/leaner way to achieve the same outcome.
+
+Usually you might have an array that you want to perform an action on each element, like so:
+
+```
+squares = []
+
+for x in range(10):
+    squares.append(x**2)
+```
+    
+with List Comprehension, this can be achieve more simply:
+
+```
+squares2 = [x**2 for x in range(10)]
+```
+
+Another interesting command was:
+
+```
+np.random.permutation(10)
+```
+
+This returns a array of randomised numbers:
+
+```
+array([9, 6, 5, 4, 0, 1, 8, 7, 3, 2])
+```
+
+This is a great way to get a randomised set of data from a pandas dataframe using the random list as random array index ids.
+
+Displaying a row of data in your dataframe, this is done by using pandas `.iloc` method. Here is an example if I wanted to see the first record in my dataframe:
+
+`df_raw.iloc[0]`
+
+If I wanted the last record I could do this:
+
+`df_raw.iloc[len(df_raw)-1]`
+
+`.iloc` also has a second parameter to retrieve the column:
+
+`df_raw.iloc[0,0]`
+
+This will display the first field, from the first row. Being able to access this data using indexes is something I can see being very powerful in the future.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
 
 ### Day 17: September 18, 2019
 
