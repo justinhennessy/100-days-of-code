@@ -9,6 +9,52 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 20: September 21, 2019
+
+**Today's Progress**
+
+Another mix of practice and finishing [lesson 7](http://course18.fast.ai/lessonsml1/lesson7.html). I think I am going to shelve the fastai course for a bit and try and use what I have learnt. There has been a heap and I still need to try and get something useful up and running.
+
+Below are some other random bits I found interesting.
+
+`%timeit` - outputs some details about small snippets of code, why I thought this was interesting is because it shows you how long each loop took so can help with optimisation down the track. Here is some sample output: `3.43 µs ± 76.8 ns per loop (mean ± std. dev. of 7 runs, 100000 loops each)`
+
+Discover an extension plugin for `jupyter notebook`, nbextensions, here is how to install it:
+
+```
+pip install jupyter_contrib_nbextensions && jupyter contrib nbextension install
+```
+
+When you relaunch `jupyter notebook` you will have a new tab, `Nbextensions`. The first one to turn on is `Collapsible Headings`. The second one is `Gist-it`. If you are unfamiliar with gist, it is just a way to share snippets of code, information etc. In this instance it enables you to publish your whole notebook if you wanted someone to take a look at what you were to up.
+
+`Gist-it` setup:
+
+Go to `https://github.com/settings/tokens` and generate a personal token, it just needs `gist` permissions so just tick that box and generate it. This requires you have a github account, if you haven't got one of those then create one.
+
+Then go into `jupyter notebook` and click on the `Gist-it` item in the list and a set of documentation will appear below. All you need to do is paste the token you generated into the blank box under `Parameters`.
+
+In your notebooks you will now have a button that looks like an outline of a cats head, click that and it will pubish it to [gist](https://gist.github.com/).
+
+`Cython` - this is an extension you can use to speed up your code. It essentially takes your python code and compiles it into C
+
+`alpha=0.05` - this is a param when you are using plots, it just means that if you have a heap of data points sitting on top of each other, it takes points that occur less and makes them more opaque
+
+Python has a tenary operator which I have found helpful in other languages:
+
+```
+x = <condition> ? do_something1 : do_something2
+```
+
+An interesting observations:
+
+Training with unblanced datasets (where your dependant case doesn't appear much), use over smapling of the uncommon cases until they are about the same as the common number, ie duplicate them. This heaps bootstraping to ensure training and validation sets have similar types of data.
+
+Information gain, try and have a very low standard diviation between branches on a logical split.
+
+SVM, a method of modelling, isn't used as much these days, it is more theoretical
+
+If there are any less than 22 of any one class then the dataset is considered unstable. This has something to do with T distribution which I will need to look into as I am not sure why this is.
+
 ### Day 19: September 20, 2019
 
 **Today's Progress**
