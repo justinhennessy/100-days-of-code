@@ -6,9 +6,167 @@
 - Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 - How can I feed in new data into a model and it show me the results per row?
 - Why should I use the log of a value instead of the actual value when training and compariing data (ie like sale price)
-- What is a dendrogram?
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
+
+### Day 18: September 19, 2019
+
+**Today's Progress**
+
+Continued my way throught the fastai [lesson 5 - Extrapolation and Random Forest from scratch](http://course18.fast.ai/lessonsml1/lesson5.html) and [lesson 6 - Data products and living code](http://course18.fast.ai/lessonsml1/lesson6.html). There was not a heap of new things just more discussion about what had already been covered from lessons 1-5, which was good to get a few more views on what it was we were looking to do and why we were doing it.
+
+In lesson 6, the lecturer mentioned an article he wrote around [Designing great data products](https://www.oreilly.com/radar/drivetrain-approach-data-products/) which covered his method of developing and working with data, super interesting.
+
+Today was has also been very much about levelling up my Python Fu. Below is just some random bits and pieces which I found useful.
+
+List comprehension
+This was a little technique I thought was useful in Python, just a nicer/leaner way to achieve the same outcome.
+
+Usually you might have an array that you want to perform an action on each element, like so:
+
+```
+squares = []
+
+for x in range(10):
+    squares.append(x**2)
+```
+    
+with List Comprehension, this can be achieve more simply:
+
+```
+squares2 = [x**2 for x in range(10)]
+```
+
+Another interesting command was:
+
+```
+np.random.permutation(10)
+```
+
+This returns a array of randomised numbers:
+
+```
+array([9, 6, 5, 4, 0, 1, 8, 7, 3, 2])
+```
+
+This is a great way to get a randomised set of data from a pandas dataframe using the random list as random array index ids.
+
+Displaying a row of data in your dataframe, this is done by using pandas `.iloc` method. Here is an example if I wanted to see the first record in my dataframe:
+
+`df_raw.iloc[0]`
+
+If I wanted the last record I could do this:
+
+`df_raw.iloc[len(df_raw)-1]`
+
+`.iloc` also has a second parameter to retrieve the column:
+
+`df_raw.iloc[0,0]`
+
+This will display the first field, from the first row. Being able to access this data using indexes is something I can see being very powerful in the future.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
+### Day 17: September 18, 2019
+
+**Today's Progress**
+
+Not too much progress today, just wiping a little egg off the face as I realised I was using the completely wrong approach for my side project! I have not issue declaring it because this is why I am here, to learn. :)
+
+So I have discovered it doesn't matter too much what method you need to use (ie Regression or Classification), a heap of steps are the same which is hugely encouraging. I feel really confident now on the pre-processing side of things, obviously I have a huge way to go but I understand the intent of what we are trying to do in that phase.
+
+I have rerun all my data using a RandomForestClassifier, which has new "scores" I need to get across ie f1 and accuracy, and currently the model is too accurate. "Data Leakage" seems to be a pretty systemic problem I have had so far, something I need to dig into more.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
+### Day 16: September 17, 2019
+
+**Today's Progress**
+
+Continued through [lesson 5](http://course18.fast.ai/lessonsml1/lesson5.html) on Extrapolation. There is an interesting concepted called a tree interpreter which shows you the +/- delta a feature has on the prediction. When coupled with a waterfall plot:
+
+![](images/waterfall_plot.png)
+(example from the fastai course)
+
+This can give us a good idea as to what impact each feature has on the predicted outcome of the dependant variable.
+
+There was also discussion around if you have a big difference between your validation and OOB scores, this often being that you need to handle temporal data better, ie be mindful of past, current and future dates in the context of predicting your dependant variable. I haven't got a method to mitigate that yet but it is something I will now take into consideration when looking at my different data sets.
+
+There was also a plotting method mentioned that compared the results from of 5 models using your validation and test sets, you then plot those results (ie predictions of the dependant variable), test set on the Y axis and validation on the X:
+
+![](images/comparison_test_validation_graph.jpg)
+
+The idea being you are looking to try and show a linear relationship, this gives good indications that your model is able to generalise well.
+
+Some good advise from the lecturer, better to find out if your model(s) generalise in testing rather than production when they can have real world impact, very sound advise I think. :) I will give this method a try at some point as it looks really useful.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
+### Day 15: September 16, 2019
+
+**Today's Progress**
+
+Pretty slow day, finalised [lesson 4](http://course18.fast.ai/lessonsml1/lesson4.html) on feature important and started watching [lesson 5](http://course18.fast.ai/lessonsml1/lesson5.html) on Extrapolation. Nothing of note today.
+
+One thing I did learn was around Cross Validation.
+
+Cross validation is not so good with temporal data (ie things with time in it) and according to the fastai people you should use it sparingly.
+
+Method:
+
+ - this randomly shuffles your data and splits it into X number of groups
+
+- for the first model, it takes the first group of data as a validation set and the rest as a training set
+
+- for the second model, it takes the second group of data as a validation set and then rest as training
+
+- this continues until you have X number of models
+
+- it then takes the averages of the results and this gives you a prediction of your dependant variable you can "cross reference" with you test set (the dataset you leave until last to confirm your model generalises ok)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
+### Day 14: September 15, 2019
+
+**Today's Progress**
+
+Contiued working through the [fast.ai](http://course18.fast.ai/lessonsml1/lesson4.html) lesson 4 course on feature importance. The focus was on more tooling to help visualise and validate the relationships between features (ie columns).
+
+I have put my own project on hold for the moment as I am not sure how to proceed. Luckily I have access to a very generous person who is going to have a look at what I have done to date. My current suspection is that my dataset is suffering some "data leakage", information that is added after the fact that is creating a very strong correlation with my dependant variable which is masking any further insight. Rather than stumbling blindly for another week I thought I would get some experienced eyes across it.
+
+I have also started reading the [100 page machine learning book](https://www.amazon.com.au/Hundred-Page-Machine-Learning-Book/dp/199957950X/) which was recommended by [Daniel Bourke](https://www.linkedin.com/in/mrdbourke/). Daniel's philosophy is to ensure you are reading "hard" books, you may not get them straight away but it extends your brain and thinking and eventually you will get across it. This is definitely one of those books as there is a heap of maths outlined which I have never seen before but interestingly through my 14 days of learning have started to see some of the concepts appear so getting more details on how things work is great.
+
+**Thoughts:**
+
+I lost a bit of momentum on my own project because I was unsure how to proceed and felt I was wasting my time. Luckily I had been build a network of ML and Data Sceience people over the last few months so have quite a few people I can reach out to.
+
+**Link to work/resources:**
+
+None.
 
 ### Day 13: September 14, 2019
 
