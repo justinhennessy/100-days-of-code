@@ -9,6 +9,33 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 19: September 20, 2019
+
+**Today's Progress**
+
+Today was very much a practical day. I have started to try and gather more data to enrich my project dataset. I was very successful and added a few more facets to it. I also successfully loaded it into my `jupyter notebook` and was able to start to tease out some more understanding on how all the features interact with each other.
+
+Not that I really know what feature engineering is yet, I feel like I embarked on my first attempt of this, creating columns of data from raw data outputs from a few systems. It is really interesting to try and build a clear view of the outcome then build features which might help give you more insight, very cool. :)
+
+I still dont have enough confidence to actually get my model working and be sure it is useful. One thing I did get across yesterday was the `f1_score`. To calculate an `f1_score` (or harmonic mean) the following formula is used:
+
+![](images/f1_score_formula.gif)
+
+`Precision` is out of all the samples the classifier identified as postive (ie it was SPAM or it was cancer), what proportion did your model get correct?
+
+`Recall` is out of all the samples the classifier identified how many did it pick up?
+
+So for example, if your dataset had 7 emails that were SPAM and your classifier (ie model) identifies 3 of them and nothing else (ie NON SPAM) then your model has a high `Precision` but because there were 7 total that it should have picked up, your model has a low `Recall` . The key is to try and get both `Precision` and `Recall` as high as possible, this is what the `f1_score` gives us, a way to see how well we are doing.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[What is an f1_score](https://www.youtube.com/watch?v=Z9NZY3ej9yY)
+[Equation GIF builder](https://www.codecogs.com/latex/eqneditor.php)
+
 ### Day 18: September 19, 2019
 
 **Today's Progress**
