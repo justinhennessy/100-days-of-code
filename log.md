@@ -9,6 +9,20 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 21: September 22, 2019
+
+**Today's Progress**
+
+[intial data analysis template](https://gist.github.com/justinhennessy/48b1c9631014d176b34196bbef3fea27)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Feature Transformation for Machine Learning, a Beginners Guide](https://medium.com/vickdata/four-feature-types-and-how-to-transform-them-for-machine-learning-8693e1c24e80)
+
 ### Day 20: September 21, 2019
 
 **Today's Progress**
