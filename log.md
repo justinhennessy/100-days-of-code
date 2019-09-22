@@ -13,7 +13,9 @@
 
 **Today's Progress**
 
-[intial data analysis template](https://gist.github.com/justinhennessy/48b1c9631014d176b34196bbef3fea27)
+Another very practical day, after reading an article on "Transformation for Machine Learning, a Beginners Guide" I created this [data analysis template](https://gist.github.com/justinhennessy/48b1c9631014d176b34196bbef3fea27) which I can see will start to be very useful when I start looking at a new set of data. It shows you the types of data you are looking at (int, string, object etc). It also visualises all of the numberic values so you can see what the distribution is of them which may give you a hint as to how to pre process them.
+
+I also gained a better understanding of how datasets are broken up into training and validation sets. Also gained more understanding of how python pandas dataframes work.
 
 **Thoughts:**
 
