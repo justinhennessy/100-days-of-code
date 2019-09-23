@@ -9,6 +9,35 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 22: September 23, 2019
+
+**Today's Progress**
+
+`df_raw.shape` - this outputs the "shape" of the dataframe `(5889, 37)`, the number of rows and the number of columns.
+
+This is a way to get a diff of 2 arrays, it returns the elements that are different (in an array):
+
+```
+list(set(df_raw.plans.unique()) - set(df_raw.plan.unique()))
+```
+
+Here is a way to remove rows that have a column with NaN in them:
+
+```
+df_raw = df_raw[~pd.isnull(df_raw.plan)]
+```
+
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Pluralsight - Data Science: The Big Picture](https://app.pluralsight.com/course-player?clipId=5d6375af-e24e-4837-81df-b8be7ed272b0)
+
+[Pandas Dataframes](https://www.shanelynn.ie/using-pandas-dataframe-creating-editing-viewing-data-in-python/)
+
 ### Day 21: September 22, 2019
 
 **Today's Progress**
