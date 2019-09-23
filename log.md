@@ -13,6 +13,8 @@
 
 **Today's Progress**
 
+Did another deep dive into data pre processing, working on levelling up my python and pandas fu. Here are a number of things I learnt was super useful:
+
 `df_raw.shape` - this outputs the "shape" of the dataframe `(5889, 37)`, the number of rows and the number of columns.
 
 This is a way to get a diff of 2 arrays, it returns the elements that are different (in an array):
@@ -27,6 +29,37 @@ Here is a way to remove rows that have a column with NaN in them:
 df_raw = df_raw[~pd.isnull(df_raw.plan)]
 ```
 
+Here is a way to replace a value across a subset of data then cast its type:
+
+```
+df_raw[case_type] = df_raw[case_type].fillna(df_raw[case_type].mean()).astype(int)
+```
+
+This is really useful for defaulting numeric values that as missing and that will have little impact on the dependant variable, as everything moves toward the `mean`, over an entire dataset.
+
+Here is a good way to get a unique list from a category feature, at the same time filtering out any `NaN`:
+
+```
+df_raw.category_field[~pd.isnull(df_raw.category_field)].unique()
+```
+
+Say this was a plan type, it means you can use this list to iterate through your dataset and set some default for a subset of data ie use in conjuction with the example above.
+
+Another really useful technique I discovered was "binning", here is some sample code:
+
+```
+bins = [1, 3, 7, 14, 30, 60]
+group_names = ['day', 'few_days', 'week', 'fortnight', 'month']
+
+last_login_categories = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
+df_raw['last_login_categories'] = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
+last_login_categories
+pd.value_counts(df_raw['last_login_categories'])
+```
+
+So, say you have a numberic field that you want to group the data and do a bit of feature engineering, these groups are called "bins". The bins are defined by the `bins` array, which tells pandas what to do when it is doing the `.cut` action. In the above example we are taking a field called `last_login_days` which may represent the number of days since a customer has logged in. We may be interested, depended on the type of customer, to be notified if a small customer for instance hasn't logged in for a `week`. This technique enables us to be a little more descriptive about this behavour and may help develop some insight and correclation we didn't know about previously.
+
+Today triggered me to start looking for more general data science courses, the Pluralsight link below was a high overview of the data science industry but was a good introduction. I will be looking for more of this over the coming days because the power it gives to visualise insights into data is very exciting.
 
 **Thoughts:**
 
