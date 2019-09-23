@@ -1,3 +1,0 @@
-#!/bin/bash
-
-rm ~/Code/fastai/courses/ml1/project.ipynb ~/Code/fastai/courses/ml1/preprocessing.ipynb || true; cp ~/Code/100-days-of-code/project/* ~/Code/fastai/courses/ml1/
