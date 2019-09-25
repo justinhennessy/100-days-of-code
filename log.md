@@ -9,6 +9,22 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 23: September 24, 2019
+
+**Today's Progress**
+
+Today was a day of reading, I have just received a new book Practical Statistics for Data Scientists which I have started consuming like there is no tomorrow. It covers everything I had questions about from EDA (Exploritory Data Analysis), Data sampling and good practices then branches into regression, predictions and classifcations, a must read from what I can tell from the skim.
+
+I will hopefully be able to apply some of my learnings to my project soon.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Practical Statistics for Data Scientists](https://www.amazon.com.au/Practical-Statistics-Scientists-Peter-Bruce/dp/1491952962/ref=sr_1_1?crid=U3KPDAIYUOXB&keywords=practical+statistics+for+data+scientists&qid=1569393950&s=gateway&sprefix=Practical+Statis%2Caps%2C295&sr=8-1)
+
 ### Day 22: September 23, 2019
 
 **Today's Progress**
