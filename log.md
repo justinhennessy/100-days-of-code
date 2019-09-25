@@ -13,7 +13,7 @@
 
 **Today's Progress**
 
-Today was a day of reading, I have just received a new book Practical Statistics for Data Scientists which I have started consuming like there is no tomorrow. It covers everything I had questions about from EDA (Exploritory Data Analysis), Data sampling and good practices then branches into regression, predictions and classifcations, a must read from what I can tell from the skim.
+Today was a day of reading, I have just received a new book Practical Statistics for Data Scientists which I have started consuming like there is no tomorrow. It covers everything I had questions about from EDA (Exploratory Data Analysis), Data sampling and good practices then branches into regression, predictions and classifications, a must read from what I can tell from the skim.
 
 I will hopefully be able to apply some of my learnings to my project soon.
 
