@@ -9,6 +9,36 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 25: September 26, 2019
+
+**Today's Progress**
+
+Today was working on my dataset again. After talking with a very generous soul on Linkedin (Thanks Larry :) ), I have moved my dependant variable back to "churned" because I was just getting too strong a correlation with "churn_concern". The main reason being it is a synthetic state which I define by a set of rules and of course the machine learning process picks that up and just tells me X predicts Y.
+
+After talking to Larry, I have a better view of what I am trying to achieve so I just take the customers that have churned (ie left) 
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None
+
+### Day 24: September 25, 2019
+
+**Today's Progress**
+
+Another highly practical day today, hopefully play with plotting libraries in Python. Being able to visual my data is super useful even though I am not sure how to use most of the graphs effectly yet.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Seaborn plotting](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Python_Seaborn_Cheat_Sheet.pdf)
+
 ### Day 23: September 24, 2019
 
 **Today's Progress**
