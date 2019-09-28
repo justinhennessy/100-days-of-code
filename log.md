@@ -9,13 +9,59 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 28: September 29, 2019
+
+**Today's Progress**
+
+I am nearing the end of the [datacamp](datacamp.com) course which has been super useful and now have a heap more confidence in what I am looking at. I am looking forward to applying all of this learning to my own project.
+
+One powerful thing I discovered today was `grid search`. This is a tool that enables you to "brute force" the "best" values for the hyperparameters for your learning algorithm which help tune its effectiveness. Again looking forward to applying this to my own work and see what I can get from it.
+
+I am going to commit to have something to present in the next 2 weeks
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Predicting customer churn in Python](https://campus.datacamp.com/courses/predicting-customer-churn-in-python)
+
+### Day 27: September 28, 2019
+
+**Today's Progress**
+
+Continued work on the [datacamp](datacamp.com) course, every chapter builds on the last so I am getting more and more insights into where I am going wrong with my model. Today I covered confusions matrix which then leads into understand precision and recall which I have mentioned before. From there you can then get an f1_score which tells you how well your model can identify "positive" cases of what you are looking for (from the whole) ie precision, then show you how well your model generalises ie recall.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Predicting customer churn in Python](https://campus.datacamp.com/courses/predicting-customer-churn-in-python)
+
+### Day 26: September 27, 2019
+
+**Today's Progress**
+
+Today I started a new course on [datacamp](datacamp.com) I found almost by accident and is hugely relevant to my project. What is good about Datacamp (so far anyway) is it is at a high level, very easy to understand and has practical programming sections. I have been able to take every example I have worked on and apply it to my own work which has been really useful. I feel way more confident in intepreting the results I am seeing through my model which is now key to getting to a state where it could actually have business implications, we will see how the next week goes. :)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Predicting customer churn in Python](https://campus.datacamp.com/courses/predicting-customer-churn-in-python)
+
 ### Day 25: September 26, 2019
 
 **Today's Progress**
 
 Today was working on my dataset again. After talking with a very generous soul on Linkedin (Thanks Larry :) ), I have moved my dependant variable back to "churned" because I was just getting too strong a correlation with "churn_concern". The main reason being it is a synthetic state which I define by a set of rules and of course the machine learning process picks that up and just tells me X predicts Y.
 
-After talking to Larry, I have a better view of what I am trying to achieve so I just take the customers that have churned (ie left) 
+After talking to Larry, I have a better view of what I am trying to achieve so I just take the customers that have churned (ie left) strip out all of the "account_status" type fields then train the model and see what that results in. At the moment my model is still way too "accurate" so I am going to continue to look at ways to remove the strong correlation because it think it is still a data leakage problem (ie things added after the fact that influence the prediction), a tomorrows job. :)
 
 **Thoughts:**
 
