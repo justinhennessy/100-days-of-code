@@ -9,6 +9,50 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 30: October 1, 2019
+
+**Today's Progress**
+
+`isinstance(object_you_are_testing, pd.DataFrame)` - will return true if its a dataframe
+
+
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[What is a dendogram](https://www.displayr.com/what-is-dendrogram/)
+
+[Synthetic Minority Over-sampling Technique (SMOTE)](https://discuss.analyticsvidhya.com/t/smote-implementation-in-python/19740)
+
+[Imbalanced-learn (python library)](https://github.com/scikit-learn-contrib/imbalanced-learn)
+
+https://towardsdatascience.com/having-an-imbalanced-dataset-here-is-how-you-can-solve-it-1640568947eb
+https://stackoverflow.com/questions/43061768/plotting-multiple-scatter-plots-pandas
+
+### Day 29: September 30, 2019
+
+**Today's Progress**
+
+Finished my first online course through to the end today!
+
+![](images/datacamp_cert_customer_churn.png)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[The Right Way to Oversample in Predictive Modeling](https://beckernick.github.io/oversampling-modeling/)
+
+[Cohen's kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa)
+
+[Tactics to combat imbalanced classes](https://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)
+
+
 ### Day 28: September 29, 2019
 
 **Today's Progress**
