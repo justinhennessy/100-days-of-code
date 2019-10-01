@@ -9,13 +9,109 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 31: October 2, 2019
+
+**Today's Progress**
+
+Holy crap, where do I start ...
+
+Once I started playing with the confusion matrix, I realised there were a heap more metrics I could output and visualise to help me figure out if what I was building was acutally useful, which ultimately what I am after.
+
+Here are some high level concepts I started digging into:
+
+`Correlation coefficient` - this measures the extent to which numeric variables are associated to one another. Pandas has a very cool method `.corr()` which enables you to render a `Correlation matrix`.
+
+`Correlation matrix` - a table where all variables are shown on rows and columns, cell values are the correlation.
+
+Here is a cool little function that visualises it:
+
+```
+def graph_corr(pandas_dataframe):
+    fig, ax = plt.subplots(figsize=(20,10))
+    corr = pandas_dataframe.corr()
+    sns.heatmap(corr, cmap='YlGnBu', annot_kws={'size':30}, ax=ax)
+    ax.set_title("Correlation Matrix", fontsize=14)
+    plt.show()
+```
+
+`mean, trimmed mean and weighted mean` - discovered there are many different wants to calculate the `mean` and different ways to use it. `trimmed mean` is simply your feature sorted, then you removed the top % percent from both the high and low ends which makes `trimmed mean` `robust`. `weighted mean` I am not completely sure on yet so haven't used it.
+
+`Robust` - so apparently in statistics, something that isn't sensitive to outliners (ie extreme values) is considered `robust`.
+
+`Probability cutoff` - so a models ability to `predict` is simply a measure of probability then deciding what threshold you want to use for it to either consider it (in my case a calassifier) either in your dependant class or not (ie churn, not churn).
+
+`Covariance` - a measure of the extent to which one variable varies in concert with another ie similar magnitude and direction.
+
+`Discriminant function` - when applied to a the predictor variables, maximises the separation of the classes
+
+`Discriminant weights` - scores that result from the application of a the discriminant function and used to estimate probabilities of belonging to one class or another
+
+Discrimination analysis can provide a measure of predictor importance, used for feature selection.
+
+`Accuracy` - the % of cases classed correctly
+
+`Sensitivity (recall)` - % of 1s correctly classified
+
+`Specificity` - % of 0s correctly classified
+
+`Precision` - % of predicted 1s that are actually 1s
+
+`Receiver Operating Characteristic (ROC) curve` - a plot of sensitiveity vs specificity
+
+`Area under the curve (AUC)` - Each point on the ROC curve represents a sensitivity/specificity pair corresponding to a particular decision threshold. The area under the ROC curve ( AUC ) is a measure of how well a parameter can distinguish between two diagnostic groups (churn/not churn).
+
+`Lift` - a measure of how effective the model is at identifying (comparitively rare) 1s at different probability cut offs
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
 ### Day 30: October 1, 2019
 
 **Today's Progress**
 
+`Confusion matrix` - 2 x 2 table which record counts by their predicted and actual classificiation. True positive, False Positive, True Negative, False Negative (left to right, top to bottom):
+
+```
+[[349  70]
+ [ 23  58]]
+```
+
+Dependant on the context of your use case, you will want to optimise some aspect of this matrix and try and achieve a certain level of accuracy, again dependant on the particular problem you are trying to solve.
+
+`Tuning hyperparameters` - Python has some very cool tools to help you figure out how to tune your learning model. This is just one example I was playing with for my RandomForestClassifier.
+
+```
+# Create the hyperparameter grid
+param_grid = {'max_features': ['auto', 'sqrt', 'log2'],
+                  'min_samples_leaf': np.arange(1,3),
+                  'n_estimators': np.arange(1,10),
+                  'class_weight':[{0: w} for w in [1, 2, 3, 5, 10, 20]],
+                  'bootstrap': [True, False],
+                  'criterion': ['gini', 'entropy'],
+                  'max_depth': [None, 1, 2, 3]
+                 }
+
+# Call GridSearchCV
+grid_search = GridSearchCV(RandomForestClassifier(), param_grid)
+
+# Fit the model
+%time grid_search.fit(X_valid, y_valid)
+
+print(grid_search.best_params_, grid_search.best_score_)
+```
+
+Be warned this can run for a long time dependant on how much params you give it. If it isn't obvious it goes through every permutation and every value to find the best result. The outcome from this, it will give you a list of values for each param that it believes is optimal, here is an exmple of the output:
+
+```
+{'bootstrap': True, 'max_features': 'auto', 'n_estimators': 8}
+```
+
+Random things:
+
 `isinstance(object_you_are_testing, pd.DataFrame)` - will return true if its a dataframe
-
-
 
 **Thoughts:**
 
@@ -29,14 +125,15 @@ None.
 
 [Imbalanced-learn (python library)](https://github.com/scikit-learn-contrib/imbalanced-learn)
 
-https://towardsdatascience.com/having-an-imbalanced-dataset-here-is-how-you-can-solve-it-1640568947eb
-https://stackoverflow.com/questions/43061768/plotting-multiple-scatter-plots-pandas
+[Imbalanced dataset here is how you can solve it](https://towardsdatascience.com/having-an-imbalanced-dataset-here-is-how-you-can-solve-it-1640568947eb)
+
+[Plotting multiple scatter plots pandas](https://stackoverflow.com/questions/43061768/plotting-multiple-scatter-plots-pandas)
 
 ### Day 29: September 30, 2019
 
 **Today's Progress**
 
-Finished my first online course through to the end today!
+Finished my first datacamp course through to the end today! That is all. :)
 
 ![](images/datacamp_cert_customer_churn.png)
 
