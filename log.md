@@ -9,6 +9,19 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 34: October 5, 2019
+
+**Today's Progress**
+
+Today was a great day, I now have a jupyter notebook which does my training and save my model. I have another notebook that loads the trained model and uses it for inference. My results are not great but that doesn't matter at this stage, I now have everything I need to make it practically useful, the steps are to go back to my training data because I think the previlance of the "1" classified case is too freqent so it sees everything as that.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+
 ### Day 33: October 4, 2019
 
 **Today's Progress**
