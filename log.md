@@ -9,6 +9,59 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 33: October 4, 2019
+
+**Today's Progress**
+
+So, discovered today that to get my model running on SageMaker, I need to build a custom docker container. It doesn't look too difficult, I will just need a big block of time to concentrate so will be a job for next week.
+
+I have attached a link below to some instructions on the process which I got from AWS support (including a bunch of others), AWS Support were actually super helpful which is good.
+
+What this means is my production deployment will need to be fairly manual. Given I have internally committed to "launching" the use of it next week, just means I will have to do the work manually while I build up the skills to create the container.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Instructions on how to deploy a custom container to SageMager](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/scikit_bring_your_own/scikit_bring_your_own.ipynb)
+
+[SageMaker Invoke Endpoint instructions](https://docs.aws.amazon.com/sagemaker/latest/dg/API_runtime_InvokeEndpoint.html)
+
+[AWS doco - API_CreateModel](https://docs.aws.amazon.com/sagemaker/latest/dg/.html)
+
+[AWS doco - API_CreateTrainingJob](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateTrainingJob.html)
+
+[AWS doco - API_CreateEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
+
+[AWS doco - API_CreateEndpointConfig](https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpointConfig.html)
+
+[AWS doco - API_runtime_InvokeEndpoint](https://docs.aws.amazon.com/sagemaker/latest/dg/API_runtime_InvokeEndpoint.html)
+
+[AWS doco - Example Dockerfile](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/container/Dockerfile)
+
+[AWS doco - build and push example script](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/tensorflow_bring_your_own/container/build_and_psh.sh)
+
+
+### Day 32: October 3, 2019
+
+**Today's Progress**
+
+Well, we begin the journey of getting something actually working in "production". I have uploaded my jupyter notebook into AWS SageMaker and have successfully got all of the libraries installed using `pip`.
+
+I didn't realise you can run shell commands directly from a notebook using the `!` operator, so something like `!pip install package` will install the package in the underlying OS which is awesome, means I can "document" the commands that need to run for setup except you can actually run them as well.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Example of loading data from s3](https://stackoverflow.com/questions/37703634/how-to-import-a-text-file-on-aws-s3-into-pandas-without-writing-to-disk)
+
+[Example of production code for a python endpoint](https://github.com/awslabs/amazon-sagemaker-examples/blob/master/advanced_functionality/fastai_oxford_pets/source/pets.py)
+
 ### Day 31: October 2, 2019
 
 **Today's Progress**
