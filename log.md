@@ -17,9 +17,9 @@ I was away for a holiday for a long weekend so only did theory work up until thi
 
 The Practical Statistics reading was mostly around imbalanced datasets, I have had a suspicion for a little while that that is part of the issues I have with my model being overly agreesive in identifying my "1" case.
 
-Last night and this morning, I have been reading about dealing with simple number (scalar) features. What I did not think about was, if you are training your model around data the is infinitely growing (ie a life time count) then eventually your numbers will out grow what your model has learnt. There simplist why to deal with this is to utilise the "binning" technique I have referenced before. The simplist two examples is fixed-width and percentile binning.
+Last night and this morning, I have been reading about dealing with simple number (scalar) features. What I did not think about was, if you are training your model around data that is infinitely growing (ie a lifetime count) then eventually your numbers will outgrow what your model has learnt. A way to deal with this is to utilise the "binning" technique I have referenced before. The simplest two examples are fixed-width and percentile binning.
 
-A good example of fixed-width binning is age, you can put people into age groups eg "1-5 years", "6-10 years" etc. This creates a more course grain view of this data and is not affected by outiers or changes over time.
+A good example of fixed-width binning is support-case ticket count, you can put them into groups eg "10+", "100+" etc. This creates a more coarse grain view of this data and is not affected by outliers or changes over time.
 
 The second is using percentiles. Pandas has a very cool method called `.quantiles` and is used like this:
 
