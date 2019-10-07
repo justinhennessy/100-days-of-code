@@ -44,6 +44,10 @@ Name: cases_age_hours_total, dtype: float64
 
 So you can probably see this works perfectly with the "binning" method as you pass these values in as the bins. Again, helps to stablise your data for growing counts.
 
+Here is a very cool visualisation which shows the data with an overlay of the "bins".
+
+![](images/binned_histogram.png)
+
 **Thoughts:**
 
 None.
