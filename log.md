@@ -9,6 +9,49 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 35, 36 & 37: October 8, 2019
+
+**Today's Progress**
+
+I was away for a holiday for a long weekend so only did theory work up until this morning. I pretty much finished the Practical Statistics book and started reading "Feature Engineering for Machine Learning" which is been brilliant. Again, the right information has appeared at the right time when I needed it. :)
+
+The Practical Statistics reading was mostly around imbalanced datasets, I have had a suspicion for a little while that that is part of the issues I have with my model being overly agreesive in identifying my "1" case.
+
+Last night and this morning, I have been reading about dealing with simple number (scalar) features. What I did not think about was, if you are training your model around data the is infinitely growing (ie a life time count) then eventually your numbers will out grow what your model has learnt. There simplist why to deal with this is to utilise the "binning" technique I have referenced before. The simplist two examples is fixed-width and percentile binning.
+
+A good example of fixed-width binning is age, you can put people into age groups eg "1-5 years", "6-10 years" etc. This creates a more course grain view of this data and is not affected by outiers or changes over time.
+
+The second is using percentiles. Pandas has a very cool method called `.quantiles` and is used like this:
+
+```
+df_raw[scalar_feature].quantile([.1, .2, .3, .4, .5, .6, .7, .8, .9])
+```
+
+This breaks up your scalar into percentile buckets (10% to 90% in this case). Here is some example output:
+
+```
+0.1      43.0
+0.2     215.0
+0.3     489.0
+0.4     773.0
+0.5    1204.0
+0.6    1732.0
+0.7    2482.0
+0.8    3645.0
+0.9    5693.0
+Name: cases_age_hours_total, dtype: float64
+```
+
+So you can probably see this works perfectly with the "binning" method as you pass these values in as the bins. Again, helps to stablise your data for growing counts.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 34: October 5, 2019
 
 **Today's Progress**
@@ -21,6 +64,7 @@ None.
 
 **Link to work/resources:**
 
+None.
 
 ### Day 33: October 4, 2019
 
