@@ -48,10 +48,10 @@ def plot_roc_pr(m, X_valid, y_valid):
 
     # show the plot
     pyplot.show()
-    
+
     # Output AUC and average precision score
     print('auc=%.3f ap=%.3f' % (area_under_curve, ap))
-    
+
 def uber_score(y_valid, validate_predictions):
     print("precision, recall, f1_score, accuracy, cohen_kappa_score, mean abs error")
     return [precision_score(y_valid,validate_predictions), recall_score(y_valid,validate_predictions), f1_score(y_valid,validate_predictions), accuracy_score(y_valid,validate_predictions), cohen_kappa_score(y_valid,validate_predictions), mean_absolute_error(y_valid,validate_predictions)]
@@ -62,32 +62,35 @@ def graph_corr(df):
     sns.heatmap(corr, cmap='YlGnBu', annot_kws={'size':30}, ax=ax)
     ax.set_title("Correlation Matrix", fontsize=14)
     plt.show()
-    
+
 def data_summary(df_raw):
     array = []
     for column_name in df_raw.select_dtypes(include=['float64', 'int64']).columns:
+        max = df_raw[column_name].max()
+        min = df_raw[column_name].min()
         mean = df_raw[column_name].mean()
         median = df_raw[column_name].median()
         std = df_raw[column_name].std()
         cv = df_raw[column_name].std()/df_raw[column_name].mean()
         trimmed_mean = trim_mean(df_raw[column_name].values, 0.1)
-        array.append([column_name, mean, trimmed_mean, median, std, cv])
-    print(tabulate(array,headers=['Column', 'Mean', 'Trimmed Mean', 'Median', 'Std', 'cv']))
+        array.append([column_name, min, max, mean, trimmed_mean, median, std, cv])
+
+    print(tabulate(array,headers=['Column', 'Min', 'Max', 'Mean', 'Trimmed Mean', 'Median', 'Std', 'cv'], tablefmt="simple"))
 
 def generate_predictions(X_valid, cutoff=PROBABILITY_CUTOFF):
     return m.predict(X_valid)
     #return (m.predict_proba(X_valid)[:,1] >= cutoff).astype(bool)
-    
+
 def conf_matrix(y_valid, validate_predictions):
     cm = confusion_matrix(y_valid, validate_predictions)
     print(cm)
-    
+
 def remove_columns_test(df):
     m = RandomForestClassifier(
         n_estimators=10,
-        min_samples_leaf=1, 
+        min_samples_leaf=1,
         max_features='sqrt',
-        n_jobs=-1, 
+        n_jobs=-1,
         #oob_score=True,
         max_depth=3,
         bootstrap=False,
