@@ -9,6 +9,26 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 38 & 39: October 10, 2019
+
+**Today's Progress**
+
+The last 2 days has mostly been on learning more about plotting and using it for other things other than my project. I am really just getting use to using the tooling generally which should be super helpful in the future.
+
+![](images/scrooz.com.au_scatter.png)
+
+![](images/scrooz.com.au_line.png)
+
+I have also been working more on my preprocessing work for my project, using binning a little more to simpliy my data but also make it more resilient to "count" fields. As count fields grow, they can grow outside the ranges the ML model has learnt about, making it less effective.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 35, 36 & 37: October 8, 2019
 
 **Today's Progress**
