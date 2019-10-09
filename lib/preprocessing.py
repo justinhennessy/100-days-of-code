@@ -57,10 +57,19 @@ def prepare_data(df_raw):
 
     last_login_categories = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
     df_raw['last_login_categories'] = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
-    #pd.value_counts(df_raw['last_login_categories'])
+
+    # Set default values for NaN values in NPS
+    df_raw.nps = df_raw.nps.fillna(np.nanmean(df_raw.nps))
+
+    # 'bin' nps
+    # Issue with this is NaN gets given a detractor status which isn't right
+    bins = [0,6.9,8.9,10]
+    group_names = ['detractor', 'passive', 'promoter']
+
+    df_raw['nps'] = pd.cut(df_raw['nps'], bins, labels=group_names)
 
     # one-hot encode fields
-    dummy_columns = ['customer_account_status', 'last_login_categories', 'plan']
+    dummy_columns = ['customer_account_status', 'last_login_categories', 'plan', 'nps']
 
     for dummy_column in dummy_columns:
         dummy = pd.get_dummies(df_raw[dummy_column], prefix=dummy_column)
@@ -78,9 +87,6 @@ def prepare_data(df_raw):
                                   'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate',
                                   'cancel_details', 'cancel_reason'])
-
-    # Set default values for NaN values in NPS
-    df_raw.nps = df_raw.nps.fillna(np.nanmean(df_raw.nps))
 
     # Set NaN to zero
     features = ['churned', 'interactions_total', 'interactions_completed', 'interactions_no_response', 'interactions_no_onboarding', 'interactions_completed_training']
