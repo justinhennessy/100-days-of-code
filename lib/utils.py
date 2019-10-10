@@ -3,6 +3,8 @@ from scipy.stats import trim_mean, kurtosis
 from fastai.imports import *
 from fastai.structured import *
 from tabulate import tabulate
+from sklearn.ensemble import RandomForestClassifier
+from matplotlib import pyplot
 from sklearn.metrics import f1_score,\
     accuracy_score, confusion_matrix,\
     precision_score, recall_score,\
@@ -13,6 +15,8 @@ from sklearn.metrics import f1_score,\
 
 # Constants
 PROBABILITY_CUTOFF = 0.50
+
+def split_vals(a,n): return a[:n], a[n:]
 
 # Utility functions
 def plot_roc_pr(m, X_valid, y_valid):
@@ -53,8 +57,8 @@ def plot_roc_pr(m, X_valid, y_valid):
     print('auc=%.3f ap=%.3f' % (area_under_curve, ap))
 
 def uber_score(y_valid, validate_predictions):
-    print("precision, recall, f1_score, accuracy, cohen_kappa_score, mean abs error")
-    return [precision_score(y_valid,validate_predictions), recall_score(y_valid,validate_predictions), f1_score(y_valid,validate_predictions), accuracy_score(y_valid,validate_predictions), cohen_kappa_score(y_valid,validate_predictions), mean_absolute_error(y_valid,validate_predictions)]
+    #print("precision, recall, f1_score, accuracy, cohen_kappa_score, mean abs error")
+    print(precision_score(y_valid,validate_predictions), recall_score(y_valid,validate_predictions), f1_score(y_valid,validate_predictions), accuracy_score(y_valid,validate_predictions), cohen_kappa_score(y_valid,validate_predictions), mean_absolute_error(y_valid,validate_predictions))
 
 def graph_corr(df):
     fig, ax = plt.subplots(figsize=(20,10))
@@ -91,7 +95,6 @@ def remove_columns_test(df):
         min_samples_leaf=1,
         max_features='sqrt',
         n_jobs=-1,
-        #oob_score=True,
         max_depth=3,
         bootstrap=False,
         criterion='gini',
