@@ -9,6 +9,35 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 40 & 41: October 12, 2019
+
+**Today's Progress**
+
+The last few days have been deep in EDA (Exploratory Data Analysis), almost going back to the drawing board but looking at the data I have for my project, making sure that it makes sense, that I am setting missing values to sane values etc.
+
+I have done a lot of reading on using `log` to help mitigate data that has big orders of magnitude in them, ie annual revenue or ticket counts/age hours etc. This helps to compress the data and mitigate having big outlying numbers which can skew your results.
+
+I have also started to gain an appreciation for the "what" I am looking for in my data if everything was normally (Gaussian) distributed filling in missing data and working with the data would be much more straight forward. To understand how your data is distributed helps to inform how to treat the data.
+
+I have created a little method that transforms a feature using log and removes the old column, it might be useful to someone:
+
+```
+def logify_feature(df, feature):
+    df[feature + '_log'] = np.log(df[feature])
+	df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
+	df[feature + '_log'] = df[feature + '_log'].isna().fillna(df[feature + '_log'].mean())
+	df = df.drop(columns=[feature])
+	return df
+```
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 38 & 39: October 10, 2019
 
 **Today's Progress**
