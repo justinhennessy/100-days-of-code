@@ -60,47 +60,36 @@ def uber_score(y_valid, validate_predictions):
     #print("precision, recall, f1_score, accuracy, cohen_kappa_score, mean abs error")
     print(precision_score(y_valid,validate_predictions), recall_score(y_valid,validate_predictions), f1_score(y_valid,validate_predictions), accuracy_score(y_valid,validate_predictions), cohen_kappa_score(y_valid,validate_predictions), mean_absolute_error(y_valid,validate_predictions))
 
-def graph_corr(df):
+def graph_corr(data_frame):
     fig, ax = plt.subplots(figsize=(20,10))
-    corr = df.corr()
+    corr = data_frame.corr()
     sns.heatmap(corr, cmap='YlGnBu', annot_kws={'size':30}, ax=ax)
     ax.set_title("Correlation Matrix", fontsize=14)
     plt.show()
 
-def data_summary(df_raw):
+def data_summary_feature(data_frame, feature):
+    """
+    Doc string
+    """
+
+    max_value = data_frame[feature].max()
+    min_value = data_frame[feature].min()
+    mean = data_frame[feature].mean()
+    median = data_frame[feature].median()
+    std = data_frame[feature].std()
+    co_variant = data_frame[feature].std()/data_frame[feature].mean()
+    trimmed_mean = trim_mean(data_frame[feature].values, 0.1)
+    return [feature, min_value, max_value, mean, trimmed_mean, median, std, co_variant]
+
+def data_summary_dataframe(data_frame):
     array = []
-    for column_name in df_raw.select_dtypes(include=['float64', 'int64']).columns:
-        max = df_raw[column_name].max()
-        min = df_raw[column_name].min()
-        mean = df_raw[column_name].mean()
-        median = df_raw[column_name].median()
-        std = df_raw[column_name].std()
-        cv = df_raw[column_name].std()/df_raw[column_name].mean()
-        trimmed_mean = trim_mean(df_raw[column_name].values, 0.1)
-        array.append([column_name, min, max, mean, trimmed_mean, median, std, cv])
+    for feature in data_frame.select_dtypes(include=['float64', 'int64']).columns:
+        array.append(data_summary_feature(data_frame, feature))
 
-    print(tabulate(array,headers=['Column', 'Min', 'Max', 'Mean', 'Trimmed Mean', 'Median', 'Std', 'cv'], tablefmt="simple"))
-
-def generate_predictions(X_valid, cutoff=PROBABILITY_CUTOFF):
-    return m.predict(X_valid)
-    #return (m.predict_proba(X_valid)[:,1] >= cutoff).astype(bool)
+    print(tabulate(array, headers=['Column', 'Min', 'Max',
+                                   'Mean', 'Trimmed Mean',
+                                   'Median', 'Std', 'cv'], tablefmt="simple"))
 
 def conf_matrix(y_valid, validate_predictions):
-    cm = confusion_matrix(y_valid, validate_predictions)
-    print(cm)
-
-def remove_columns_test(df):
-    m = RandomForestClassifier(
-        n_estimators=10,
-        min_samples_leaf=1,
-        max_features='sqrt',
-        n_jobs=-1,
-        max_depth=3,
-        bootstrap=False,
-        criterion='gini',
-        class_weight={0: 2, 1: 1})
-    x, _ = split_vals(df, n_trn)
-    m.fit(x, y_train)
-    y_pred = m.predict(x)
-    return uber_score(y_train, y_pred)
-
+    confusion_matrix_data = confusion_matrix(y_valid, validate_predictions)
+    print(confusion_matrix_data)
