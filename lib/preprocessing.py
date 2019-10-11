@@ -41,6 +41,11 @@ def default_annual_revenue(dataframe):
             revenue = mean
         dataframe.loc[dataframe.plan==plan, 'annual_revenue'] = dataframe.loc[dataframe.plan==plan, 'annual_revenue'].fillna(revenue)
 
+def features_with_nan(df):
+    for feature in df.columns:
+        if len(df[df[feature].isna() == True]) > 0:
+            print('Feature has NaN values: ' + feature)
+
 def prepare_data(df_raw):
     # Sort data by date
     df_raw = df_raw.sort_values(by='licence_registration_date')
@@ -96,7 +101,7 @@ def prepare_data(df_raw):
     df_raw = df_raw.drop(columns=['customer_account_status_Good', 'last_login_concern',
                                   'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate',
-                                  'cancel_details', 'cancel_reason', 'url'])
+                                  'cancel_details', 'cancel_reason', 'url', 'merchant'])
 
     # Set NaN to zero
     features = ['churned', 'interactions_total', 'interactions_completed', 'interactions_no_response', 'interactions_no_onboarding', 'interactions_completed_training']
@@ -104,8 +109,12 @@ def prepare_data(df_raw):
     for feature in features:
         df_raw[feature] = df_raw[feature].fillna(0)
 
-    # Complete the transformation of all data into numbers using proc_df and create training dataframes
+    # Complete the transformation of all data into
+    # numbers using proc_df and create training dataframes
+
     train_cats(df_raw)
+
+    features_with_nan(df_raw)
 
     return df_raw
 
