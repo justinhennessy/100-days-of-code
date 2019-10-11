@@ -10,6 +10,13 @@ from sklearn.metrics import f1_score,\
     precision_recall_curve, auc,\
     average_precision_score
 
+def logify_feature(df, feature):
+    df[feature + '_log'] = np.log(df[feature])
+    df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
+    df[feature + '_log'] = df[feature + '_log'].isna().fillna(df[feature + '_log'].mean())
+    df = df.drop(columns=[feature])
+    return df
+
 def currency_tonumeric(dataframe,feature):
     # Convert from a string to a float
     dataframe[feature] = pd.to_numeric(dataframe[feature].str.replace(',', ''))
@@ -82,11 +89,14 @@ def prepare_data(df_raw):
     add_datepart(df_raw, 'licence_registration_date')
     add_datepart(df_raw, 'golive_date')
 
+    for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
+        df_raw = logify_feature(df_raw, feature)
+
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
     df_raw = df_raw.drop(columns=['customer_account_status_Good', 'last_login_concern',
                                   'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate',
-                                  'cancel_details', 'cancel_reason'])
+                                  'cancel_details', 'cancel_reason', 'url'])
 
     # Set NaN to zero
     features = ['churned', 'interactions_total', 'interactions_completed', 'interactions_no_response', 'interactions_no_onboarding', 'interactions_completed_training']
@@ -98,3 +108,4 @@ def prepare_data(df_raw):
     train_cats(df_raw)
 
     return df_raw
+
