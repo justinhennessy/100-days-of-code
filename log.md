@@ -9,6 +9,32 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 42 & 43: October 14, 2019
+
+**Today's Progress**
+
+The last 2 days have been spent on learning about power (aka variance-stabilising) transformations and how they help to better distribute the data in a particular feature.
+
+I have found what often happens is I find that my data has a Poisson distribution ie skewed to one side with a long tail:
+
+![](images/poisson_distribution.png)
+
+Power transforms help us "stabilise" the data and moves it more to a Gaussian distribution (ie a bell curve). Below is an example of a feature I was working on that started out quite heavily skewed to the left but after performing some power transformations (ie log) on the data, you can see it transforms it more into a normal distribution pattern.
+
+To be honest, I am still trying to understand the basics as to why this matters but from what I can gather is normal distribution data trends towards the mean so if you can get your data distributed in that way then things like linear regression etc will be more effective.
+
+Would love to hear from some stats people to validating this train of thought. :)
+
+![](images/power_transforms_example.png)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 40 & 41: October 12, 2019
 
 **Today's Progress**
