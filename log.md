@@ -197,7 +197,7 @@ def graph_corr(pandas_dataframe):
     plt.show()
 ```
 
-`mean, trimmed mean and weighted mean` - discovered there are many different wants to calculate the `mean` and different ways to use it. `trimmed mean` is simply your feature sorted, then you removed the top % percent from both the high and low ends which makes `trimmed mean` `robust`. `weighted mean` I am not completely sure on yet so haven't used it.
+`mean, trimmed mean and weighted mean` - discovered there are many different ways to calculate the `mean` and different ways to use it. `trimmed mean` is simply your feature sorted, then you removed the top % percent from both the high and low ends which makes `trimmed mean` `robust`. `weighted mean` I am not completely sure on yet so haven't used it.
 
 `Robust` - so apparently in statistics, something that isn't sensitive to outliners (ie extreme values) is considered `robust`.
 
@@ -554,6 +554,7 @@ None.
 **Link to work/resources:**
 
 [What is an f1_score](https://www.youtube.com/watch?v=Z9NZY3ej9yY)
+
 [Equation GIF builder](https://www.codecogs.com/latex/eqneditor.php)
 
 ### Day 18: September 19, 2019

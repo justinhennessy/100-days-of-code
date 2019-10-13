@@ -10,11 +10,12 @@ from sklearn.metrics import f1_score,\
     precision_recall_curve, auc,\
     average_precision_score
 
-def logify_feature(df, feature):
+def logify_feature(df, feature, drop=True):
     df[feature + '_log'] = np.log(df[feature])
-    df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
-    df[feature + '_log'] = df[feature + '_log'].isna().fillna(df[feature + '_log'].mean())
-    df = df.drop(columns=[feature])
+    #df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
+    #df[feature + '_log'] = df[feature + '_log'].isna().fillna(df[feature + '_log'].mean())
+    if drop:
+        df = df.drop(columns=[feature])
     return df
 
 def currency_tonumeric(dataframe,feature):
@@ -31,6 +32,8 @@ def default_annual_revenue(dataframe):
     # Fix missing values for annual revenue, replace with mean/trimmed mean of the plan size they are on
     plan_list = dataframe.plan[~pd.isnull(dataframe.plan)].unique()
 
+    platform_revenue_median = dataframe.annual_revenue.median()
+
     for plan in plan_list:
         mean = round(dataframe.annual_revenue[dataframe.plan == plan].mean(), 2)
         trimmed_mean = trim_mean(dataframe.annual_revenue[dataframe.plan == plan].values, 0.1)
@@ -40,6 +43,8 @@ def default_annual_revenue(dataframe):
         else:
             revenue = mean
         dataframe.loc[dataframe.plan==plan, 'annual_revenue'] = dataframe.loc[dataframe.plan==plan, 'annual_revenue'].fillna(revenue)
+
+    dataframe['annual_revenue'][dataframe['annual_revenue'] == 0] = dataframe['annual_revenue'].median()
 
 def features_with_nan(df):
     for feature in df.columns:
@@ -94,7 +99,8 @@ def prepare_data(df_raw):
     add_datepart(df_raw, 'licence_registration_date')
     add_datepart(df_raw, 'golive_date')
 
-    for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
+    #for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
+    for feature in ['days_active', 'golive_days', 'cases_age_hours_total']:
         df_raw = logify_feature(df_raw, feature)
 
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
