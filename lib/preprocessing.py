@@ -12,7 +12,7 @@ from sklearn.metrics import f1_score,\
 
 def logify_feature(df, feature, drop=True):
     df[feature + '_log'] = np.log(df[feature])
-    #df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
+    df[feature + '_log'] = df[feature + '_log'].replace(-np.inf, np.nan)
     #df[feature + '_log'] = df[feature + '_log'].isna().fillna(df[feature + '_log'].mean())
     if drop:
         df = df.drop(columns=[feature])
@@ -66,14 +66,14 @@ def prepare_data(df_raw):
     default_annual_revenue(df_raw)
 
     # 'bin' last login days
-    bins = [1, 3, 7, 14, 30, 60]
-    group_names = ['day', 'few_days', 'week', 'fortnight', 'month']
+    #bins = [1, 3, 7, 14, 30, 60]
+    #group_names = ['day', 'few_days', 'week', 'fortnight', 'month']
 
     # need to get the mean of the plan size for last_login_days and set each row to that
     #df_raw.last_login_days = df_raw.last_login_days.fillna(np.mean(df_raw.last_login_days))
 
-    last_login_categories = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
-    df_raw['last_login_categories'] = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
+    #last_login_categories = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
+    #df_raw['last_login_categories'] = pd.cut(df_raw['last_login_days'], bins, labels=group_names)
 
     # Set default values for NaN values in NPS
     df_raw.nps = df_raw.nps.fillna(np.nanmean(df_raw.nps))
@@ -86,7 +86,8 @@ def prepare_data(df_raw):
     df_raw['nps'] = pd.cut(df_raw['nps'], bins, labels=group_names)
 
     # one-hot encode fields
-    dummy_columns = ['customer_account_status', 'last_login_categories', 'plan', 'nps']
+    #dummy_columns = ['customer_account_status', 'last_login_categories', 'plan', 'nps']
+    dummy_columns = ['customer_account_status', 'plan', 'nps']
 
     for dummy_column in dummy_columns:
         dummy = pd.get_dummies(df_raw[dummy_column], prefix=dummy_column)
@@ -99,25 +100,24 @@ def prepare_data(df_raw):
     add_datepart(df_raw, 'licence_registration_date')
     add_datepart(df_raw, 'golive_date')
 
-    #for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
-    for feature in ['days_active', 'golive_days', 'cases_age_hours_total']:
+    for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
         df_raw = logify_feature(df_raw, feature)
 
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
     df_raw = df_raw.drop(columns=['customer_account_status_Good', 'last_login_concern',
                                   'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate',
-                                  'cancel_details', 'cancel_reason', 'url', 'merchant'])
+                                  'cancel_details', 'cancel_reason', 'url', 'merchant',
+                                  'total_churn_concern_cases_age'])
 
-    # Set NaN to zero
-    features = ['churned', 'interactions_total', 'interactions_completed', 'interactions_no_response', 'interactions_no_onboarding', 'interactions_completed_training']
-
-    for feature in features:
-        df_raw[feature] = df_raw[feature].fillna(0)
+    # Set any remaining NaNs to the features median
+    for feature in df_raw.select_dtypes(include=['float64', 'int64']).columns:
+        median = df_raw[feature].median()
+        #print(f"{feature}: {median}")
+        df_raw[feature] = df_raw[feature].fillna(df_raw[feature].median())
 
     # Complete the transformation of all data into
     # numbers using proc_df and create training dataframes
-
     train_cats(df_raw)
 
     features_with_nan(df_raw)

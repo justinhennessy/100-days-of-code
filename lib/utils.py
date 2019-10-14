@@ -18,6 +18,10 @@ PROBABILITY_CUTOFF = 0.50
 
 def split_vals(a,n): return a[:n], a[n:]
 
+def display_all(df):
+    with pd.option_context("display.max_rows", 1000, "display.max_columns", 1000):
+        display(df)
+
 # Utility functions
 def plot_roc_pr(m, X_valid, y_valid):
     # Generate the probabilities
@@ -28,7 +32,7 @@ def plot_roc_pr(m, X_valid, y_valid):
     # Calculate the roc metrics
     fpr, tpr, thresholds = roc_curve(y_valid, y_pred_prob)
 
-    fig, ax = plt.subplots(figsize=(20,10))
+    fig, ax = plt.subplots(figsize=(10,10))
 
     # Plot the ROC curve
     plt.plot(fpr,tpr, label='ROC')
@@ -92,4 +96,5 @@ def data_summary_dataframe(data_frame):
 
 def conf_matrix(y_valid, validate_predictions):
     confusion_matrix_data = confusion_matrix(y_valid, validate_predictions)
+    print("tp, fn, fp, tn")
     print(confusion_matrix_data)
