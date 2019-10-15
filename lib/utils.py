@@ -34,23 +34,24 @@ def plot_roc_pr(m, X_valid, y_valid):
 
     fig, ax = plt.subplots(figsize=(10,10))
 
-    # Plot the ROC curve
-    plt.plot(fpr,tpr, label='ROC')
-
     # Add labels and diagonal line
-    plt.xlabel("False Positive Rate")
-    plt.ylabel("True Positive Rate")
+    plt.xlabel("False Positive Rate / Recall")
+    plt.ylabel("True Positive Rate / Precision")
     plt.plot([0, 1], [0, 1], "k--", label='no skill')
+    plt.plot([0,0,1,1],[0,1,1,1],'g-',label='perfect')
 
     # Plot a precision-recall curve
     precision, recall, thresholds = precision_recall_curve(y_valid, y_pred_prob)
     area_under_curve = auc(recall, precision)
     ap = average_precision_score(y_valid, y_pred_prob)
 
+    # Plot the ROC curve
+    plt.plot(fpr,tpr, label='AUC: %.3f'%area_under_curve)
+
     # plot no skill
-    pyplot.plot([0, 1], [0.5, 0.5], linestyle='--', label='no skill')
+    pyplot.plot([0, 1], [0.5, 0.5], linestyle='--', color='magenta', label='no skill')
     # plot the precision-recall curve for the model
-    pyplot.plot(recall, precision, marker='.', label='precision-recall')
+    pyplot.plot(recall, precision, marker='.', color='orange', label='precision-recall')
 
     legend = ax.legend(loc='best', shadow=True, fontsize='medium')
 
@@ -80,10 +81,11 @@ def data_summary_feature(data_frame, feature):
     min_value = data_frame[feature].min()
     mean = data_frame[feature].mean()
     median = data_frame[feature].median()
+    mode = data_frame[feature].mode()
     std = data_frame[feature].std()
     co_variant = data_frame[feature].std()/data_frame[feature].mean()
     trimmed_mean = trim_mean(data_frame[feature].values, 0.1)
-    return [feature, min_value, max_value, mean, trimmed_mean, median, std, co_variant]
+    return [feature, min_value, max_value, mean, trimmed_mean, median, mode, std, co_variant]
 
 def data_summary_dataframe(data_frame):
     array = []
