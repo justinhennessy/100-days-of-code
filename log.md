@@ -9,6 +9,28 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
+### Day 44 & 45: October 16, 2019
+
+**Today's Progress**
+
+The last 2 days has been heavily focused on my project and getting closer to the data. I was able to lift my Area Under the Curve (AUC) value by 0.24 (from 0.55 to 0.79) because I realised (after consulting with domain experts) I had some rubbish data in my dataset that I was using to train my model.
+
+Very little to say other than, holy moly does cleaning and preprocessing your data take some time. I am looking forward to building up some common patterns and tools to help with that because the ramp up time is horrendous, I can't imaging talking on a domain I didn't know, it would be impossible at this point, but I will get there. :)
+
+Very little to say other than, holy moly does cleaning and preprocessing your data take some time. I am looking forward to building up some common patterns and tools to help with that because the ramp up time is horrendous, I can't imaging taking on a domain I didn't know, it would be impossible at this point, but I will get there. :)
+
+Below is my latest Receiver Operating Characteristics (ROC) Curve which measures the number of True Positives (ie ones that were correct) and False Positives (the ones that weren't). The precision-recall curve is exactly that, plots the precision (the models ability to return only relevant items) and recall (the models ability to identify all relevant items). These are always at odds and the trick is finding an acceptable balance between them.
+
+![](images/ROC_curve.png)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 42 & 43: October 14, 2019
 
 **Today's Progress**
