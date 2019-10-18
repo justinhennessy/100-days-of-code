@@ -1,0 +1,4 @@
+#!/bin/bash
+
+clear
+python -m unittest tests/*.py
