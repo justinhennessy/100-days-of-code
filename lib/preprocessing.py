@@ -18,6 +18,31 @@ def logify_feature(df, feature, drop=True):
         df = df.drop(columns=[feature])
     return df
 
+def random_replace_value(df, feature):
+    median = df[feature].median()
+    mean = df[feature].mean()
+    trimmed_mean = trim_mean(df[feature].values, 0.1)
+
+    random_choice = random.randint(1, 3)
+
+    if random_choice == 1:
+        value = mean
+    elif random_choice == 2:
+        value = trimmed_mean
+    else:
+        value = median
+
+    return value
+
+def fix_days_active(df):
+    feature = 'days_active'
+    df[feature + '_modified'] = 0
+
+    for i in df.loc[(df[feature] > 2136) & (df[feature] < 2138)].index:
+        df[feature][i] = random_replace_value(df, feature)
+        df.loc[i, feature + '_modified'] = 1
+    return df
+
 def currency_tonumeric(dataframe,feature):
     # Convert from a string to a float
     dataframe[feature] = pd.to_numeric(dataframe[feature].str.replace(',', ''))
@@ -76,30 +101,39 @@ def preprocess_last_login_days(df):
     return df
 
 def prepare_data(df_raw):
+    print("Sorting dataframe by licence_registration_date ...")
     df_raw = df_raw.sort_values(by='licence_registration_date')
 
+    print("Converting annual_revenue to a number ...")
     currency_tonumeric(df_raw, 'annual_revenue')
 
+    print("Defaulting all NaN values with median ...")
     df_raw = default_nan(df_raw, ['cases_total', 'cases_open', 'cases_closed',
                                   'cases_age_hours_total', 'cases_age_hours_average',
                                   'last_login_days'])
 
+    print("Defaulting annual_revenue for missing values to the plans mean or platform medeian ...")
     default_annual_revenue(df_raw)
 
+    print("Binning last_login_days")
     df_raw = preprocess_last_login_days(df_raw)
 
+    print("Binning NPS data")
     df_raw = preprocess_nps(df_raw)
 
+    print("Fixing days_active abnormal values ...")
+    df_raw = fix_days_active(df_raw)
+
     # one-hot encode fields
-    #dummy_columns = ['customer_account_status', 'last_login_categories', 'plan', 'nps']
     dummy_columns = ['customer_account_status', 'plan', 'nps']
 
     for dummy_column in dummy_columns:
+        print(f"One-hot encoding {dummy_column}")
         dummy = pd.get_dummies(df_raw[dummy_column], prefix=dummy_column)
         df_raw = pd.concat([df_raw,dummy], axis=1)
         df_raw = df_raw.drop(columns=dummy_column)
 
-
+    print("Preprocessing dates ...")
     # This breaks all the date features up into number columns
     # These steps can only be run once then you need to comment them out
     add_datepart(df_raw, 'licence_registration_date')
@@ -109,24 +143,27 @@ def prepare_data(df_raw):
     #for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
     #    df_raw = logify_feature(df_raw, feature)
 
+    print("Dropping features ...")
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
     df_raw = df_raw.drop(columns=['customer_account_status_Good', 'last_login_concern',
                                   'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate',
                                   'cancel_details', 'cancel_reason', 'url', 'merchant',
-                                  'total_churn_concern_cases_age', 'username'])
+                                  'total_churn_concern_cases_age'])
 
+    print("Replacing NaN values with median and adding '_was_nan' column ...")
     # Set any remaining NaNs to the features median
     for feature in df_raw.select_dtypes(include=['float64', 'int64']).columns:
         median = df_raw[feature].median()
-        #print(f"{feature}: {median}")
         df_raw[feature] = df_raw[feature].fillna(df_raw[feature].median())
         df_raw[feature + '_was_nan'] = 1
 
+    print("Convert categorical features into numbers ...")
     # Complete the transformation of all data into
     # numbers using proc_df and create training dataframes
     train_cats(df_raw)
 
+    print("List any features that still have NaN values ...")
     features_with_nan(df_raw)
 
     return df_raw
