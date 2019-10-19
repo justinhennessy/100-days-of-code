@@ -24,7 +24,7 @@ Interpretations:
 * Partial dependance plots. How do features related to each other? Ie if we increase the days elapsed keeping all other features fixed, how does it affect the probability?
 * Explore some predictions with interpretations. Consider creating a spreadsheet of observations for each data point. Where is the model making decisions with noisy data for example?
 
-### Day 47 & 48: October 19, 2019
+### Day 47, 48 and 49: October 20, 2019
 
 **Today's Progress**
 
