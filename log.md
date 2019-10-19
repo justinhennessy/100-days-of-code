@@ -9,7 +9,22 @@
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
-### Day 47: October 18, 2019
+### Project ToDos:
+
+Feature prep:
+
+(completed) * Fix imputation: add <feature>_is_na column (handled in Fast.ai's preproc)
+* Create histograms of each continuous feature. Any spikes or weird distributions that might indicate a messy dataset?
+* Plot bar charts for categorical. Any features that have low cardinality or are really imbalanced that can be removed?
+* Better time series approaches. Can you get a breakdown of cases opened per month?
+* Any other features you could add to the training data? Engagement per day? Number of errors the user received etc?
+
+Interpretations:
+
+* Partial dependance plots. How do features related to each other? Ie if we increase the days elapsed keeping all other features fixed, how does it affect the probability?
+* Explore some predictions with interpretations. Consider creating a spreadsheet of observations for each data point. Where is the model making decisions with noisy data for example?
+
+### Day 47 & 48: October 19, 2019
 
 **Today's Progress**
 
