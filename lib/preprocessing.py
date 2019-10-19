@@ -38,7 +38,7 @@ def fix_days_active(df):
     feature = 'days_active'
     df[feature + '_modified'] = 0
 
-    for i in df.loc[(df[feature] > 2136) & (df[feature] < 2138)].index:
+    for i in df[(df['licence_registration_date'] == '11/25/2013') & (df['licence_status'] != "CANCELLED")].index:
         df[feature][i] = random_replace_value(df, feature)
         df.loc[i, feature + '_modified'] = 1
     return df
