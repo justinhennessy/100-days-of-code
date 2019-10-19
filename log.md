@@ -13,7 +13,7 @@
 
 Feature prep:
 
-(completed) * Fix imputation: add <feature>_is_na column (handled in Fast.ai's preproc)
+* (complete) Fix imputation: add <feature>_is_na column (handled in Fast.ai's preproc)
 * Create histograms of each continuous feature. Any spikes or weird distributions that might indicate a messy dataset?
 * Plot bar charts for categorical. Any features that have low cardinality or are really imbalanced that can be removed?
 * Better time series approaches. Can you get a breakdown of cases opened per month?
