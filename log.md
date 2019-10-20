@@ -36,7 +36,46 @@ I have learnt a heap around how to pre process my data better and what feature e
 
 ![](images/abnormal_data_spike.png)
 
-This turned out to be data that was changed 6 years ago, a manual adjustment if you will. My method for helping smooth this out is to replace the specific value (2153 for interest) with the median. I then added a feature "was_modified" to indicate I had changed the original value.
+This turned out to be data that was changed 6 years ago, a manual adjustment if you will. My initial method for helping smooth this out was to replace the specific value (2153 for interest at that time) with the median. I then added a feature "was_modified" to indicate I had changed the original value. What I found was, it actually moved the spike:
+
+![](images/abnormal_data_spike_moved.png)
+
+So, and I haven't validated statiscally if this is a good process, I decided to replace the value with a random value, either the mean, trimmed mean or median, just to try and smooth it out a little more. What was cool about this effort was I got much more intimatedly involved with pandas dataframes and started to get a great understanding (and appreciation) of them. For reference, here is the code I created to help me with this:
+
+```
+def random_replace_value(df, feature):
+    median = df[feature].median()
+    mean = df[feature].mean()
+    trimmed_mean = trim_mean(df[feature].values, 0.1)
+ 
+    random_choice = random.randint(1, 3)
+ 
+    if random_choice == 1:
+        value = mean
+    elif random_choice == 2:
+        value = trimmed_mean
+    else:
+        value = median
+ 
+    return value
+ 
+  def fix_spike(df):
+      feature = some_continous_value
+      df[feature + '_modified'] = 0
+ 
+      for i in df[(df['date'] == '11/25/2013') & (df['status'] != "X")].index:
+          df[feature][i] = random_replace_value(df, feature)
+          df.loc[i, feature + '_modified'] = 1
+      return df
+```
+
+So what is really cool about this, is I can filter out a subset of my dataframe then using `.index` I can reference each row. Where this becomes important is when you want to change a value and create a new feature to make that row that it has been modified in some where.
+
+Here is the resulting graph, a nicely smooth histagram:
+
+![](images/abnormal_data_spike_vanish.png)
+
+Something that has just happened is, the output from my inference endpoint has dramatically dropped in "churn" count. So either, I have done some great and now it is being a little more choosey what it marks as churned or ... I have broken it. :) Stay tuned for Day 50! That will be my primary goal is to try and explain what happened.
 
 The most important lesson I have learnt is, when replacing missing or NaN values, ensure you add a new feature which "tags" that you have replace a value with something synthetic. So you might have `days_active`, if you replace any missing values with lets say the `.median()` then you add a `days_active_was_nan` column and make it equal to 1. The fastai library does this for you, the `.proc_df()` method but it uses the mean, as I wanted to try and median, I "rolled" my own.
 
