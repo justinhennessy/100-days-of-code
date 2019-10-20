@@ -22,6 +22,15 @@ def display_all(df):
     with pd.option_context("display.max_rows", 1000, "display.max_columns", 1000):
         display(df)
 
+def general_stats(df, feature):
+    array = utils.data_summary_feature(df, feature)
+    print(array[0])
+    print("")
+    count = 1
+    for heading in ['Min', 'Max', 'Mean', 'Trimmed Mean', 'Median', 'Std', 'CV']:
+        print(f"{heading}: {array[count]}")
+        count += 1
+
 # Utility functions
 def plot_roc_pr(m, X_valid, y_valid):
     # Generate the probabilities
