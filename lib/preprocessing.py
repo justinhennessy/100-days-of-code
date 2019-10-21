@@ -91,13 +91,14 @@ def preprocess_nps(df):
 
 def preprocess_last_login_days(df):
     # 'bin' last login days
-    bins = [1, 3, 7, 14, 30, 60]
-    group_names = ['day', 'few_days', 'week', 'fortnight', 'month']
+    bins = [-1, 2, 4, 7, 15, 30, df['last_login_days'].max()]
+    group_names = ['day', 'few_days', 'week', 'fortnight', 'month', 'month+']
 
     # need to get the mean of the plan size for last_login_days and set each row to that
     #df_raw.last_login_days = df_raw.last_login_days.fillna(np.mean(df_raw.last_login_days))
 
     df['last_login_categories'] = pd.cut(df['last_login_days'], bins, labels=group_names)
+    print(df['last_login_categories'].value_counts())
     return df
 
 def prepare_data(df_raw):
