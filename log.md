@@ -24,6 +24,31 @@ Interpretations:
 * Partial dependance plots. How do features related to each other? Ie if we increase the days elapsed keeping all other features fixed, how does it affect the probability?
 * Explore some predictions with interpretations. Consider creating a spreadsheet of observations for each data point. Where is the model making decisions with noisy data for example?
 
+
+### Day 50! October 21, 2019
+
+Well we made it half way. Hands down this is the most focused I have been in learning any topic for a very long time. The results speak for themselves, I am perhaps 1-2 weeks away from having something that will be usable (in a testing capacity at least) in production.
+
+Once again I am back into understanding my data and using techniques to either smooth out or enriching what I have. I am also learning a lot about what feature engineering is and how to do it effectively.
+
+One of today's learnings has been about binning, here is some example code I can talk to:
+
+```
+def preprocess_last_login_days(df):
+    # 'bin' last login days
+    bins = [-1, 2, 4, 7, 15, 30, df['last_login_days'].max()]
+    group_names = ['day', 'few_days', 'week', 'fortnight', 'month', 'month+']
+
+    # need to get the mean of the plan size for last_login_days and set each row to that
+    #df_raw.last_login_days = df_raw.last_login_days.fillna(np.mean(df_raw.last_login_days))
+
+    df['last_login_categories'] = pd.cut(df['last_login_days'], bins, labels=group_names)
+    print(df['last_login_categories'].value_counts())
+    return df
+```
+
+When I started using binning I read the "bins" array as, if your value is above this then it will go into the X bin. What I discovered (unsurprisingly) is they are ranges. So take for instance my array `[-1, 2, 4, 7, 15, 30, MAX]`, the way to read this is, if my value is between `-1` and `2` then it will end up in bin `day`. Why this is important is because when you get to the last bin, if you dont have a range that encompasses all your values in a feature then they will not get binned. Too me a while to figure this out and I had to use `.value_counts` and also output the number of items that were above the value of my last bin. To fix this I just added the MAX value of the feature and had a "catch all" bin at the end, which worked quite nicely. 
+
 ### Day 47, 48 and 49: October 20, 2019
 
 **Today's Progress**
