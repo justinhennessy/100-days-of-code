@@ -164,7 +164,7 @@ def prepare_data(df_raw):
     #    df_raw = logify_feature(df_raw, feature)
 
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
-    for feature in ['customer_account_status_Good', 'last_login_concern', 'last_login_days', 'account_status', 'changing_platform',
+    for feature in ['customer_account_status_Good', 'last_login_days', 'account_status', 'changing_platform',
                                   'new_platform', 'licence_status', 'canceldate', \
                                   'cancel_details', 'cancel_reason', 'url', 'merchant', \
                                   'total_churn_concern_cases_age']:
