@@ -1,3 +1,4 @@
 #!/bin/bash
 
-rm ~/Code/fastai/data/churn.csv || true; mv ~/Downloads/ML\ Project\ -\ Full\ customer\ list\ -\ ML\ Model\ Data.csv ./data/churn.csv
+rm ~/Code/100-days-of-code/data/churn.csv || true
+mv ~/Downloads/ML\ Project\ -\ Full\ customer\ list\ -\ ML\ Model\ Data.csv ./data/churn.csv
