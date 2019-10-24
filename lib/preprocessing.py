@@ -69,6 +69,7 @@ def default_annual_revenue(df):
 
     plan_list = df.plan[~pd.isnull(df.plan)].unique()
 
+    # Replace NaN annual_revenue values with an appropriate value based on plan
     for plan in plan_list:
         mean = abs(round(df.annual_revenue[df.plan == plan].mean(), 2))
         trimmed_mean = trim_mean(df.annual_revenue[df.plan == plan].values, 0.1)
@@ -81,6 +82,9 @@ def default_annual_revenue(df):
             df.loc[df.plan == plan, 'annual_revenue'].fillna(revenue)
         df['annual_revenue_was_missing'] = 1
 
+        df.loc[(df.annual_revenue == 0) & (df.plan == plan)] = revenue
+
+    # Output any rows that have NaN for plan or annual_revenue
     if len(df[df.plan.isna() == True]) > 0:
       print("Output customers with no plan set ...")
       print(df.username[df.plan.isna() == True])

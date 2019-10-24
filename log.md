@@ -34,9 +34,32 @@ None.
 
 **Link to work/resources:**
 
-### Day 51, 52 & 53 October 24, 2019
+### Day 51, 52, 53 & 54 October 25, 2019
 
 **Today's Progress**
+
+To be honest, the last 3 days have been very difficult and I have hit a significant road block. I now have a working process end to end, I can pre process my data, train my model, I can then get a "real" list of data and pass it through my inference code and get an output.
+
+The issue I have now is, I need some more data to add to my master dataset and I am having trouble getting it. I am also still struggling with the "why" the model chose something.
+
+The other issue is I am getting wildy different results between my working environments (my work laptop and my home desktop). The other day I was getting 0.8 something on my AUC (area under the curve) but when I transferred my work to my home laptop I was getting 0.551. I then ensured I had consistant code and data and got the two working environments returning about the same. I then tried the next morning and suddenly my working environment was 0.91! Anyway, just something to keep an eye on. I am not random sampling so I am not sure why the results are so different (though I would expect some differences).
+
+One positive thing I have achieved is utilising the eli5 library to try and get some better understanding as to why the model is classifying certain records. I have also got a much deeper understanding of how panadas works and how to move through dataframes, especitally correlating pre and post data processing dataframe data.
+
+So the use of eli5 is quite easy, here is some sample code:
+
+```
+from eli5 import show_prediction
+
+loc_address = df_filtered[df_filtered.username == n_number].index[0]
+show_prediction(churn_model, df_data.loc[loc_address], show_feature_values=True)
+```
+
+So what I am doing here is, finding a specificy row in my pre processed dataframe (before I split the data and pass it through my inference code) and returning its row location. I then use the `show_prediction` method from the eil5 library to pass that through raw of my dataframe through my trained model.
+
+This then outputs a table showing each feature, its value and how much influence, either positive or negative, it has on the classification process.
+
+What has been really good is as I have refined my process and filtered out feature noise and rubbish data, the things the model is seeing as important is starting to make sense.
 
 **Thoughts:**
 
