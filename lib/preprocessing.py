@@ -78,11 +78,11 @@ def default_annual_revenue(df):
             revenue = platform_revenue_median
         else:
             revenue = mean
+        
         df.loc[df.plan == plan, 'annual_revenue'] = \
             df.loc[df.plan == plan, 'annual_revenue'].fillna(revenue)
         df['annual_revenue_was_missing'] = 1
-
-        df.loc[(df.annual_revenue == 0) & (df.plan == plan)] = revenue
+        df.annual_revenue.loc[(df.annual_revenue == 0) & (df.plan == plan)] = revenue
 
     # Output any rows that have NaN for plan or annual_revenue
     if len(df[df.plan.isna() == True]) > 0:
