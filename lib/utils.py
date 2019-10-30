@@ -23,7 +23,7 @@ def display_all(df):
         display(df)
 
 def general_stats(df, feature):
-    array = utils.data_summary_feature(df, feature)
+    array = data_summary_feature(df, feature)
     print(array[0])
     print("")
     count = 1
