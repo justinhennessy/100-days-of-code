@@ -34,6 +34,41 @@ None.
 
 **Link to work/resources:**
 
+### Day 58 and 59 October 30, 2019
+
+**Today's Progress**
+
+I discovered a floor in some of my pre processing code which was causing skewed results when looking at feature importance.
+
+I am now getting very close to my inference data being used in a practical way which is super exciting. Although I can't talk specifics, it is such a good feeling to be at the useful (well hopefully) end of the process.
+
+The biggest issue I still have is around validating the data that is coming out of the process. I can now see the "why" but can't with full confidence, hand on heart say "this is it, its correct", whatever that means.
+
+So the next chunk of work is going to be less exciting and that is fine better was to get access to the base data and start to look at ways to automate the generation of that data and automate the ELT process.
+
+The other outstanding item is deploying the inference code somewhere. Given most of my experience is on AWS, SageMaker is the likely starting point though I would definitely be happy to look at other providers in the future like Google, Azure or IBM (though I have little knowledge of what hosted options they have). What is involved in the AWS deployment is the building of a custom container, register it with AWS ECR (Elastic Container Registry) then point SageMaker at it. I had an article which I found at some stage but for the life of me can't find it, so another thing on the todo. :)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+
+### Day 55, 56, and 57 October 28, 2019
+
+**Today's Progress**
+
+The last 3 days of been a very hard slog and very difficult to keep focused. I have made little progress and have definitely felt like I had been losing steam. Because I dont have any official source to validate my work, it is becoming more difficult to move forward. Ill keep slogging through, a break through is inevitable.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 51, 52, 53 & 54 October 25, 2019
 
 **Today's Progress**
