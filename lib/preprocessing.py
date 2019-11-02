@@ -186,9 +186,7 @@ def prepare_data(df_raw):
 
     print("Defaulting all NaN values with median ...")
     default_fields = ['cases_total', 'cases_open', 'cases_closed',
-                                  'cases_age_hours_total', 'cases_age_hours_average',
-                                  'last_login_days']
-    print(f"  {default_fields}")
+                                  'cases_age_hours_total', 'cases_age_hours_average']
     df_raw = default_nan(df_raw, default_fields)
 
     #print("Defaulting annual_revenue for missing values to the plans mean or platform medeian ...")
@@ -216,16 +214,15 @@ def prepare_data(df_raw):
     # This breaks all the date features up into number columns
     # These steps can only be run once then you need to comment them out
     add_datepart(df_raw, 'licence_registration_date')
-    add_datepart(df_raw, 'golive_date')
+    #add_datepart(df_raw, 'golive_date')
 
     # Disabled because we dont necissarily need normal distribution for Random Forest models
     #for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
     #    df_raw = logify_feature(df_raw, feature)
 
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
-    for feature in ['customer_account_status_Good', 'last_login_days', 'account_status', 'changing_platform',
-                                  'new_platform', 'licence_status', 'canceldate', \
-                                  'cancel_details', 'cancel_reason', 'url', 'merchant', \
+    for feature in ['customer_account_status_Good', 'last_login_days', 'account_status', \
+                                  'licence_status', 'canceldate', 'url', \
                                   'total_churn_concern_cases_age']:
         print(f"Dropping feature {feature} ...")
         df_raw = df_raw.drop(columns=[feature])
