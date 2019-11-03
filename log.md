@@ -34,11 +34,25 @@ None.
 
 **Link to work/resources:**
 
-### Day 60 to 63 November 3, 2019
+### Day 60 to 64 November 4, 2019
 
 **Today's Progress**
 
-Another few days of neglected posting but heaps of learnings. I am on the brink of having my project being released into production
+Another 5 days of neglected posting but heaps of learnings. I am on the brink of having my project being "released" into production. That being that we are going to start using the data which is coming out of my inference endpoint will be folded into our Customer Success process to help priorities calls.
+
+Something that I have been really struggling with was, how do I "version control" my work on the model. Because notebooks are a big blob of info and essentially every time you run the notebook it changes the entire file, it is quite difficult to keep track of how you have tuned or modified your code or model. The problem I was having was when I made changes that adversely affected my model, I couldn't just "rollback" to a last known good state, I would have to remember changes I had made and undo the code or hyper parameter changes.
+
+After another awesome catch up with my ML mentor, he introduced me to the "weights and biases" service. It is primarily for strudents and researches but it allows you to submit data (ie accuracy scores), model hyperparameters and actual file artifacts (ie your model, any saved validation sets etc). This is revolutionised the way I work. This service logs every run I do in my notebooks, stores a bunch of metadata around my model tuning, logs a bunch of accuracy scores and also uploads the actual model that I trained.
+
+Here is my [public profile](https://app.wandb.ai/justinhennessy), you can see how many runs I do a day!
+
+Something that I also convered in my last chat with my mentor is "continous data pipelines", I was really excited to discuss that because it then falls into the same pattern as coding CI/CD (Continuous Deployment).
+
+Here is a concept diagram that I have created to show how this might work:
+
+![](images/continous_data_pipeline.png)
+
+This essentially means, the creation of the aggregated data and the training of the model (on going) becomes completely automatic. Obviously it would need to be monitored but it has all the parts needed for a continously delivered and current machine learning model!
 
 **Thoughts:**
 
