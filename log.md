@@ -34,6 +34,18 @@ None.
 
 **Link to work/resources:**
 
+### Day 60 to 63 November 3, 2019
+
+**Today's Progress**
+
+Another few days of neglected posting but heaps of learnings. I am on the brink of having my project being released into production
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
 ### Day 58 and 59 October 30, 2019
 
 **Today's Progress**
