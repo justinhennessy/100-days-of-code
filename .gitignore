@@ -3,3 +3,4 @@ data/*
 *.pkl
 .ipynb_checkpoints
 *__pycache__*
+project/wandb*
