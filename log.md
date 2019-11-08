@@ -34,6 +34,44 @@ None.
 
 **Link to work/resources:**
 
+### Day 69 November 9, 2019
+
+**Today's Progress**
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+### Day 65, 66, 67 and 68 November 8, 2019
+
+**Today's Progress**
+
+Another very slow 4 days, most of which has been spent on feature engineering around customer support case ticket aggregates (ie total last month, total this month etc per customer). This was to try and get trends rather than continuous values which seem to be less than useful.
+
+Last Thursday, I was lucky enough to be invited to speak at the Queensland AI meetup, the topic, my journey to date on the 100 days of coding.
+
+![](images/queensland_ai_preso.png)
+
+I discussed my struggles in the beginning with ML and dealing with the "I am not smart enough to do this type of stuff". Thanks to a few key individuals (aka Daniel Bourke and Lex) I was able to over come that and make some great head way over the lsat 68 days.
+
+I have started to communicate to the organisation that I work for around what I have been up to and what the next steps are. I am looking forward to creating a heap of content around this over the coming months.
+
+The focus for the next week will be ensuring I can get this work into product and start it being used.
+
+One of the coolest tooling discoveries I have made over the week is the [weights and biases site](app.wandb.ai). I had an on going problem of not being able to track how my changes were impacting my model's accuracy over time. This service enables you to easily submit not only accuracy scores but also metadata (ie model hyperparameters) and files, so you can upload your actual model and your validation sets.
+
+Here is an example of types of visualisations you can get from it:
+
+![](images/wandb_graphs.png)
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
 ### Day 60 to 64 November 4, 2019
 
 **Today's Progress**
