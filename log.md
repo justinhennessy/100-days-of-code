@@ -64,7 +64,7 @@ One of the coolest tooling discoveries I have made over the week is the [weights
 
 Here is an example of types of visualisations you can get from it:
 
-![](images/wandb_graphs.png)
+![](images/weights_and_bia_graph.png)
 
 **Thoughts:**
 
