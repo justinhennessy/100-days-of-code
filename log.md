@@ -34,9 +34,42 @@ None.
 
 **Link to work/resources:**
 
-### Day 69 November 9, 2019
+### Day 69 and 70 November 10, 2019
 
 **Today's Progress**
+
+The last two days have been super productive thanks to a new ML mentor I have connected with through the Queensland AI meetup. He has helped me get a really good grasp on what I am trying to do and what numbers to watch.
+
+Firstly, I have settling on ensuring `precision` is high and `recall` is low. For my business case it is more important to correctly classify ANY records, I am not too fussed how many (at this stage) it correctly identifies from the total number.
+
+Second is, I have a good understanding of what `lift` is, so I know what my % value is for a random selection, I can now calculate how much better my predictions are than a random sampling.
+
+target-classification/(non-target-classifiaction+target-classification) = % of random selection
+
+So if
+
+target-classification = 3084
+non-target-classification = 1823
+
+3084/(1823+3084) or 62.85%
+
+So if my "lift" is
+
+precision / (% of random selection)
+
+So if my precision on my validation dataset is 86%
+And my random sample selection is 62.85%
+
+then my "lift" is 36.83% better than random sampling
+
+Random stuff:
+
+Sample code to fix the order of a categorical feature:
+
+```
+df.feature_x.cat.set_categories(['day', 'few_days', 'week', \
+								 'fortnight', 'month', 'month+'], ordered=True, inplace=True)
+```
 
 **Thoughts:**
 
