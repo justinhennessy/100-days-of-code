@@ -50,9 +50,10 @@ def currency_tonumeric(dataframe, feature):
 def default_nan(df, features_array):
     # Default NaN values with median
     for feature in features_array:
+        #df[feature + '_was_missing'] = 0
+        #df[feature + '_was_missing'].loc[df[feature].isna()] = 1
         default_value = df[feature].fillna(df[feature].median())
         df[feature] = df[feature].fillna(default_value).astype(int)
-        df[feature + '_was_nan'] = 1
     return df
 
 def get_plan_list(df):
@@ -69,6 +70,29 @@ def get_platform_median(df, feature):
 
 def get_platform_mean(df, feature):
     return df[feature].mean()
+
+def default_based_on_plan(df, feature):
+    platform_median = get_platform_median(df, feature)
+    print(f"  Platform '{feature}' median: {platform_median}")
+
+    platform_mean = get_platform_mean(df, feature)
+    print(f"  Platform '{feature}' mean: {platform_mean}")
+
+    plan_list = get_plan_list(df)
+
+    for plan in plan_list:
+        mean = get_plan_mean(df, plan, feature)
+
+        if pd.isnull(mean):
+            feature_value = platform_median
+        else:
+            feature_value = mean
+
+        df.loc[df.plan == plan, feature] = df.loc[df.plan == plan, feature].fillna(feature_value)
+
+    print(f"  List records that still have NaN in them for feature '{feature}' ...")
+    print(f"  {len(df.loc[df[feature].isna()])}")
+    return df
 
 def default_last_login_days(df):
     platform_last_login_days_median = get_platform_median(df, 'last_login_days')
@@ -159,6 +183,18 @@ def preprocess_nps(df):
     df['nps'] = pd.cut(df['nps'], bins, labels=group_names)
     return df
 
+def bin_days_active(df):
+    # Set default values for NaN values
+    df.days_active = df.days_active.fillna(-1)
+
+    bins = [-2, 0, 2, 7, 14, 30, 90, 180, 365, 730, 1460]
+    group_names = ['no_data', 'day', 'week', 'fortnight', 'month', '3months', '6months', '1year', '2years', '2years+']
+
+    df['days_active'] = pd.cut(df['days_active'], bins, labels=group_names)
+
+    return df
+
+
 def preprocess_last_login_days(df):
     # 'bin' last login days
     bins = [-1, 2, 4, 7, 15, 30, df['last_login_days'].max()]
@@ -181,13 +217,20 @@ def prepare_data(df_raw):
     # Set plan type to no_plan if it is missing
     df_raw = set_no_plan(df_raw)
 
-    print("Defaulting last_login_days for missing values to the plans mean or platform medeian ...")
-    df_raw = default_last_login_days(df_raw)
+    for feature in ['last_login_days', 'last_month_total', 'mtd_total', 'last_month_open', 'mtd_open',
+       'last_month_closed', 'mtd_closed', 'last_month_age_hours',
+       'mtd_age_hours', 'month_total_avg', 'open_month_avg',
+       'closed_month_avg', 'age_hours_month_avg']:
+        print(f"Defaulting '{feature}' for missing values to the plans mean or platform medeian ...")
+        df_raw = default_based_on_plan(df_raw, feature)
 
-    print("Defaulting all NaN values with median ...")
-    default_fields = ['cases_total', 'cases_open', 'cases_closed',
-                                  'cases_age_hours_total', 'cases_age_hours_average']
-    df_raw = default_nan(df_raw, default_fields)
+    #print("Defaulting all NaN values with median ...")
+    #default_fields = ['last_month_total', 'mtd_total', 'last_month_open',
+    #                  'mtd_open', 'last_month_closed', 'mtd_closed',
+    #                  'last_month_age_hours', 'mtd_age_hours', 'month_total_avg',
+    #                  'open_month_avg', 'closed_month_avg', 'age_hours_month_avg']
+
+    #df_raw = default_nan(df_raw, default_fields)
 
     #print("Defaulting annual_revenue for missing values to the plans mean or platform medeian ...")
     #df_raw = default_annual_revenue(df_raw)
@@ -201,13 +244,16 @@ def prepare_data(df_raw):
     print("Fixing days_active abnormal values ...")
     df_raw = fix_days_active(df_raw)
 
+    print("Bin days_active ...")
+    df_raw = bin_days_active(df_raw)
+
     # one-hot encode fields
-    dummy_columns = ['customer_account_status', 'plan', 'nps', 'last_login_categories']
+    dummy_columns = ['customer_account_status', 'plan', 'nps', 'last_login_categories', 'days_active']
 
     for dummy_column in dummy_columns:
         print(f"One-hot encoding {dummy_column}")
         dummy = pd.get_dummies(df_raw[dummy_column], prefix=dummy_column)
-        df_raw = pd.concat([df_raw,dummy], axis=1)
+        df_raw = pd.concat([df_raw, dummy], axis=1)
         df_raw = df_raw.drop(columns=dummy_column)
 
     print("Preprocessing dates ...")
@@ -216,13 +262,9 @@ def prepare_data(df_raw):
     add_datepart(df_raw, 'licence_registration_date')
     #add_datepart(df_raw, 'golive_date')
 
-    # Disabled because we dont necissarily need normal distribution for Random Forest models
-    #for feature in ['days_active', 'golive_days', 'cases_age_hours_total', 'annual_revenue']:
-    #    df_raw = logify_feature(df_raw, feature)
-
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
-    for feature in ['customer_account_status_Good', 'last_login_days', 'account_status', \
-                                  'canceldate', 'url', \
+    for feature in ['account_status', 'customer_account_status_Good', \
+                                  'canceldate', \
                                   'total_churn_concern_cases_age']:
         print(f"Dropping feature {feature} ...")
         df_raw = df_raw.drop(columns=[feature])
@@ -235,7 +277,6 @@ def prepare_data(df_raw):
     # Complete the transformation of all data into
     # numbers using proc_df and create training dataframes
     train_cats(df_raw)
-    #df_raw.last_login_categories.cat.set_categories(['day', 'few_days', 'week', 'fortnight', 'month', 'month+'], ordered=True, inplace=True)
 
     print("List any features that still have NaN values ...")
     features_with_nan(df_raw)
