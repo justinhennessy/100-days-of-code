@@ -71,8 +71,12 @@ def plot_roc_pr(m, X_valid, y_valid):
     print('auc=%.3f ap=%.3f' % (area_under_curve, ap))
 
 def uber_score(y_valid, validate_predictions):
-    #print("precision, recall, f1_score, accuracy, cohen_kappa_score, mean abs error")
-    print(precision_score(y_valid,validate_predictions), recall_score(y_valid,validate_predictions), f1_score(y_valid,validate_predictions), accuracy_score(y_valid,validate_predictions), cohen_kappa_score(y_valid,validate_predictions), mean_absolute_error(y_valid,validate_predictions))
+    print(f"Precision: {precision_score(y_valid,validate_predictions)}")
+    print(f"Recall: {recall_score(y_valid,validate_predictions)}")
+    print(f"f1_score: {f1_score(y_valid,validate_predictions)}")
+    print(f"Accuracy: {accuracy_score(y_valid,validate_predictions)}")
+    print(f"kappa: {cohen_kappa_score(y_valid,validate_predictions)}")
+    print(f"mean abs error: {mean_absolute_error(y_valid,validate_predictions)}")
 
 def graph_corr(data_frame):
     fig, ax = plt.subplots(figsize=(20,10))
