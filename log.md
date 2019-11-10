@@ -71,11 +71,21 @@ df.feature_x.cat.set_categories(['day', 'few_days', 'week', \
 								 'fortnight', 'month', 'month+'], ordered=True, inplace=True)
 ```
 
+Doing a `.value_counts()` type operation on numpy array:
+
+```
+unique_elements, counts_elements = np.unique(y_valid, return_counts=True)
+print("Frequency of unique values of the said array:")
+print(np.asarray((unique_elements, counts_elements)))
+```
+
 **Thoughts:**
 
 None.
 
 **Link to work/resources:**
+
+[What is "lift"](https://en.wikipedia.org/wiki/Lift_(data_mining))
 
 ### Day 65, 66, 67 and 68 November 8, 2019
 
