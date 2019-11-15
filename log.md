@@ -34,6 +34,69 @@ None.
 
 **Link to work/resources:**
 
+### Day 71 to 76 Novermber 16, 2019
+
+**Today's Progress**
+
+It has been super slow going over the last 6 days, having an overseas business trip didn't help but I still got some work done over that time.
+
+I have been spending time honing my data manipulation skills with python, really trying to get a hang of panads dataframes and how to efficiently generate and replace values.
+
+I have started working on building some ETL code to aggregate customer support case data from sales force which has proven challenging, mainly because I was trying to do it in gsheets but because of the sheer volume of data, it just wouldn't do what I needed it to do.
+
+One useful thing I did discover was how to take year and month features and generate a proper date from them:
+
+```
+df['date'] = pd.to_datetime(df.assign(day=1).loc[:, ['year','month','day']])
+```
+
+This generates a datetime dtype `date` which you can be very useful.
+
+I also dicovered `relativedelta` which helps to generate future or past dates:
+
+```
+df.iloc[1].date + relativedelta(months=-1)
+```
+
+^ this gives me a date a month before the date in question, super useful when looking for ranges of dates.
+
+Now I haven't found a good use for this one yet but, this helps generate different values for things grouped by time. So if I wanted to know the `mean` of the number of customer support tickets for a particular customer over the last 12 months I can use this:
+
+```
+df.open_cases.loc[(df['customer id'] == '1234567')].resample('M').mean()
+```
+
+This is the output:
+
+```
+date
+2018-01-31    0.000000
+2018-02-28    0.000000
+2018-03-31    0.000000
+2018-04-30    0.000000
+2018-05-31    0.071429
+2018-06-30    0.000000
+2018-07-31    0.055556
+2018-08-31    0.000000
+2018-09-30    0.058824
+```
+
+The only trick with using this is you have to change the index of your dataframe to use the date:
+
+```
+df.set_index('date', inplace = True)
+```
+
+Usually panads by default uses a self generated `index` feature, like an auto index in MySQL.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+None.
+
 ### Day 69 and 70 November 10, 2019
 
 **Today's Progress**
@@ -115,6 +178,8 @@ None.
 
 **Link to work/resources:**
 
+None.
+
 ### Day 60 to 64 November 4, 2019
 
 **Today's Progress**
@@ -141,6 +206,8 @@ None.
 
 **Link to work/resources:**
 
+None.
+
 ### Day 58 and 59 October 30, 2019
 
 **Today's Progress**
@@ -161,6 +228,7 @@ None.
 
 **Link to work/resources:**
 
+None.
 
 ### Day 55, 56, and 57 October 28, 2019
 
@@ -209,6 +277,8 @@ None.
 
 **Link to work/resources:**
 
+None.
+
 ### Day 50! October 21, 2019
 
 **Today's Progress**
@@ -240,6 +310,8 @@ When I started using binning I read the "bins" array as, if your value is above 
 None.
 
 **Link to work/resources:**
+
+None.
 
 ### Day 47, 48 and 49: October 20, 2019
 
@@ -309,6 +381,8 @@ like: "0–0.20 as slight, 0.21–0.40 as fair, 0.41–0.60 as moderate,
 None.
 
 **Link to work/resources:**
+
+None.
 
 ### Day 46: October 17, 2019
 
