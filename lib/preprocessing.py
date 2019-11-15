@@ -263,15 +263,16 @@ def prepare_data(df_raw):
     #add_datepart(df_raw, 'golive_date')
 
     # Drop columns, some of these create "Data Leakage", some are just to test if it has impact when they are taken out
-    for feature in ['account_status', 'customer_account_status_Good', \
+    #for feature in ['account_status', 'customer_account_status_Good', \
+    for feature in ['account_status', \
                                   'canceldate', \
                                   'total_churn_concern_cases_age']:
         print(f"Dropping feature {feature} ...")
         df_raw = df_raw.drop(columns=[feature])
 
-    for regex_filter in ['interactions', 'churn_concern']:
-        print(f"Dropping features with '{regex_filter}' in their name ...")
-        df_raw = df_raw[df_raw.columns.drop(list(df_raw.filter(regex=regex_filter)))]
+    #for regex_filter in ['interactions', 'churn_concern']:
+    #    print(f"Dropping features with '{regex_filter}' in their name ...")
+    #    df_raw = df_raw[df_raw.columns.drop(list(df_raw.filter(regex=regex_filter)))]
 
     print("Convert categorical features into numbers ...")
     # Complete the transformation of all data into
