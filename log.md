@@ -34,6 +34,57 @@ None.
 
 **Link to work/resources:**
 
+### Day 77 and 78 Novermber 17, 2019
+
+I decided to go back and do some more basics and started with an intro to python for data science. I have realised over the last week or so that my python foo needs a level up as I am strugging with some of the complex things I am trying to do with my data and to be honest, I was fumbling around.
+
+Couple random things I learnt:
+
+List slicing, the start index is inclusive, the end is exclusive
+
+```
+list[1:3]
+```
+
+numpy arrays are super powerful, you can do things like this:
+
+```
+a = np.array([1, 2])
+b = np.array([3, 4])
+
+a + b = [4, 6]
+
+a ** 2 = [2, 4]
+```
+
+Reference 2D numpy arrays is also cool
+
+```
+a = np.array([[1, 2], [3, 4]])
+
+a[:,0] = [1, 3] (gets the first column of each row
+```
+
+Do (100 * 1.1) 7 times.
+
+```
+print(100 * 1.1 ** 7)
+```
+
+I finished the course!
+
+![](images/datacamp_intro_to_python.png)
+
+**Today's Progress**
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Introduction to Python](https://campus.datacamp.com/courses/intro-to-python-for-data-science)
+
 ### Day 71 to 76 Novermber 16, 2019
 
 **Today's Progress**
