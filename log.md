@@ -57,6 +57,46 @@ This is super cool, `pd.read_csv()` has some powerful options, here is an exampl
 df2 = pd.read_csv(file_messy, delimiter=' ', header=3, comment='#')
 ```
 
+If you want to just show certain columns in a dataframe you can do this:
+
+```
+cols = ['weight', 'mpg']
+
+df[cols]
+```
+
+If you want to put plots of different rows:
+
+```
+fig, axes = plt.subplots(nrows=2, ncols=1)
+
+df.column_name1.plot(ax=axes[0], kind='hist')
+plt.show()
+
+df.column_name2.plot(ax=axes[1], kind='hist')
+plt.show()
+```
+
+If you want to get the mean of each row by the index (this is useful when the index of a dataframe is a date or year.
+
+```
+df.mean(axis='columns')
+```
+
+When working with a DateTimeIndex, you can do things like this:
+
+```
+# Extract the hour from 9pm to 10pm on '2010-10-11': ts1
+ts1 = ts0.loc['2010-10-11 21:00:00':'2010-10-11 22:00:00']
+
+# Extract '2010-07-04' from ts0: ts2
+ts2 = ts0.loc['2010-07-04 21:00:00']
+
+# Extract data from '2010-12-15' to '2010-12-31': ts3
+ts3 = ts0.loc['2010-12-15':'2010-12-15']
+```
+
+
 **Thoughts:**
 
 None.
