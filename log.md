@@ -34,6 +34,37 @@ None.
 
 **Link to work/resources:**
 
+### Day 79 November 18, 2019
+
+**Today's Progress**
+
+users['fees'] = 0 <- when doing this and 'fees' is a new column in a data frame, they call it `broadcasting` as it broadcasts `0` to all rows in the dataframe in the new column.
+
+Even more powerfully, if you are creating a dataframe from a `dict` type (dictionary) you can do something like this:
+
+```
+h = [ 1, 2, 3 ]
+data = { h: h, 'b': 'b' }
+
+results = pd.DataFrame(data)
+```
+
+This creates a data frame with h as the values in the list, and `'b'` in the `b` column, so it `broadcasts` the `'b'` value to all rows.
+
+This is super cool, `pd.read_csv()` has some powerful options, here is an example:
+
+```
+df2 = pd.read_csv(file_messy, delimiter=' ', header=3, comment='#')
+```
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Pandas Foundations - Datacamp](https://campus.datacamp.com/courses/pandas-foundations)
+
 ### Day 77 and 78 Novermber 17, 2019
 
 I decided to go back and do some more basics and started with an intro to python for data science. I have realised over the last week or so that my python foo needs a level up as I am strugging with some of the complex things I am trying to do with my data and to be honest, I was fumbling around.
