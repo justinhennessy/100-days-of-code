@@ -57,6 +57,102 @@ This is super cool, `pd.read_csv()` has some powerful options, here is an exampl
 df2 = pd.read_csv(file_messy, delimiter=' ', header=3, comment='#')
 ```
 
+If you want to just show certain columns in a dataframe you can do this:
+
+```
+cols = ['weight', 'mpg']
+
+df[cols]
+```
+
+If you want to put plots of different rows:
+
+```
+fig, axes = plt.subplots(nrows=2, ncols=1)
+
+df.column_name1.plot(ax=axes[0], kind='hist')
+plt.show()
+
+df.column_name2.plot(ax=axes[1], kind='hist')
+plt.show()
+```
+
+If you want to get the mean of each row by the index (this is useful when the index of a dataframe is a date or year.
+
+```
+df.mean(axis='columns')
+```
+
+When working with a DateTimeIndex, you can do things like this:
+
+```
+# Extract the hour from 9pm to 10pm on '2010-10-11': ts1
+ts1 = ts0.loc['2010-10-11 21:00:00':'2010-10-11 22:00:00']
+
+# Extract '2010-07-04' from ts0: ts2
+ts2 = ts0.loc['2010-07-04 21:00:00']
+
+# Extract data from '2010-12-15' to '2010-12-31': ts3
+ts3 = ts0.loc['2010-12-15':'2010-12-15']
+```
+
+# Extract data from 2010-Aug-01 to 2010-Aug-15: unsmoothed
+unsmoothed = df['Temperature']['2010-Aug-01':'2010-Aug-15']
+
+# Apply a rolling mean with a 24 hour window: smoothed
+smoothed = unsmoothed.rolling(window=24).mean()
+
+# Create a new DataFrame with columns smoothed and unsmoothed: august
+august = pd.DataFrame({'smoothed':smoothed, 'unsmoothed':unsmoothed})
+
+# Plot both smoothed and unsmoothed data using august.plot().
+august.plot()
+plt.show()
+
+A Pandas Dataframe is made up of multiple Panadas Series. Therefore you can create a Dataframe from 2 or more Pandas Series.
+
+`.describe()` can be used on one or more Pandas series, the reason it works on a Dataframe, is because it is just multiple Series.
+
+`.interpolate(how='linear')` can be used to more easily fill in missing data, best used with temporal continuous data.
+
+Add a date and time together into one feature:
+
+```
+times_tz_none = pd.to_datetime( la['Date (MM/DD/YYYY)'] + ' ' + la['Wheels-off Time'] )
+```
+
+If you want to plot a date range:
+
+```
+df.Temperature['2010-06-10':'2010-06-17'].plot()
+plt.show()
+```
+
+The cool thing about this is the labelling of the X axis is taken care of.
+
+So this is cool, creating a `mask` as a filter:
+
+```
+# Using df_clean, when is sky_condition 'CLR'?
+is_sky_clear = df_clean['sky_condition']=='CLR'
+
+# Filter df_clean using is_sky_clear
+sunny = df_clean[is_sky_clear]
+```
+
+so `is_sky_clear` is a Pandas Series, which is essentially a `True`, `False` list. You can then pass it into your dataframe and it will return the `True` rows within the Dataframe.
+
+Here is how to see if a couple of features correlate:
+
+
+```
+# Select the visibility and dry_bulb_faren columns and resample them: weekly_mean
+weekly_mean = df_clean[['dry_bulb_faren', 'visibility']].resample('W').mean()
+
+# Print the output of weekly_mean.corr()
+print(weekly_mean.corr())
+```
+
 **Thoughts:**
 
 None.
