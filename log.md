@@ -3,9 +3,7 @@
 ### Questions to Answer
 
 - What do I do with date fields that have no values? how do I default them?
-- Can I visually represent a decision tree as a graph? I want to understand why averaging values at the other leaf nodes across multiple trees gives us a better result
 - How can I feed in new data into a model and it show me the results per row?
-- Why should I use the log of a value instead of the actual value when training and compariing data (ie like sale price)
 - What is Rank correlation? and what is monotonic data?
 - What is a univariate relationships?
 
@@ -34,9 +32,19 @@ None.
 
 **Link to work/resources:**
 
-### Day 79 November 18, 2019
+### Day 79 to 83 November 18, 2019
 
 **Today's Progress**
+
+Another big 5 days of learning, this time around Pandas. I have completed the Pandas Foundation course on Datacamp which has been hugely useful already. Here is proof:
+
+![](images/datacamp_pandas_foundations.png)
+
+I definitely needed to do this earlier because I have been really struggling with using Dataframes effectively. I will be continuing the learning around this in the coming weeks.
+
+So the dilemma I have now is, do I continue doing this foundational type learning or do I try and get my teeth into another algorythm (ie Gradient Boosting) ... not sure at this stage. I think I will complete a few more "Python in Data science" type courses and see where that gets me in the next week.
+
+Below is a long list of random, but useful things I have learnt along the way:
 
 users['fees'] = 0 <- when doing this and 'fees' is a new column in a data frame, they call it `broadcasting` as it broadcasts `0` to all rows in the dataframe in the new column.
 
@@ -96,18 +104,15 @@ ts2 = ts0.loc['2010-07-04 21:00:00']
 ts3 = ts0.loc['2010-12-15':'2010-12-15']
 ```
 
-# Extract data from 2010-Aug-01 to 2010-Aug-15: unsmoothed
+Here is a good example of using a DateTimeIndex and the `.rolling` method. This is SO powerful when trying to get a feeling of trends, I can see if being invaluable going forward.
+
+```
 unsmoothed = df['Temperature']['2010-Aug-01':'2010-Aug-15']
-
-# Apply a rolling mean with a 24 hour window: smoothed
 smoothed = unsmoothed.rolling(window=24).mean()
-
-# Create a new DataFrame with columns smoothed and unsmoothed: august
 august = pd.DataFrame({'smoothed':smoothed, 'unsmoothed':unsmoothed})
-
-# Plot both smoothed and unsmoothed data using august.plot().
 august.plot()
 plt.show()
+```
 
 A Pandas Dataframe is made up of multiple Panadas Series. Therefore you can create a Dataframe from 2 or more Pandas Series.
 
@@ -143,7 +148,6 @@ sunny = df_clean[is_sky_clear]
 so `is_sky_clear` is a Pandas Series, which is essentially a `True`, `False` list. You can then pass it into your dataframe and it will return the `True` rows within the Dataframe.
 
 Here is how to see if a couple of features correlate:
-
 
 ```
 # Select the visibility and dry_bulb_faren columns and resample them: weekly_mean
