@@ -32,7 +32,235 @@ None.
 
 **Link to work/resources:**
 
-### Day 79 to 83 November 18, 2019
+### Day 84 to 87 November 26, 2019
+
+**Today's Progress**
+
+The last 4 days has been purely around learning more about Pandas dataframes, a follow on from the foundation course.
+
+Below are just a bunch of random things of interest, mostly so I can come back and reference them:
+
+To get a subset of columns from a Dataframe:
+
+```
+df[['col1', 'col2', 'col3']]
+```
+
+To slice a dataframe in reverse (assuming the index is the column you are slicing on:
+
+```
+df['value5':'value1':-1]
+```
+
+To select all rows and just some columns, this works the same as np.array:
+
+```
+df.loc[:, 'col_2':'col4']
+```
+
+You can use lists as well:
+
+```
+rows = ['Philadelphia', 'Centre', 'Fulton']
+cols = ['winner', 'Obama', 'Romney']
+
+election.loc[rows, cols]
+```
+
+A boolean filter can be super useful, the first line returns a boolean series and is used to filter the full dataframe:
+
+```
+filter = df['col_2'] > 70
+df[filter]
+```
+
+Using a boolean filter to assign a value to a subset:
+
+```
+filter = df['col_1'] < 1
+
+df.loc[filter, 'col_2'] = np.nan
+```
+
+You can use `.all()` to return features that have ALL nonzero values, it returns a boolean series.
+
+`.any()` returns features with SOME nonzero values, it will not return features that have all zeros
+
+To perform a custom function to a dataframe with no loops:
+
+```
+df.apply(lambda n: n*2)
+```
+
+This will take all values, from all columns and multiply them by 2.
+
+Very powerful way to do custom operations over entire dataframes or selected features:
+
+```
+def to_celsius(F):
+    return 5/9*(F - 32)
+
+df_celsius = weather[['Mean TemperatureF', 'Mean Dew PointF']].apply(to_celsius)
+```
+
+A way to "map" one value to another:
+
+```
+red_vs_blue = {'Obama':'blue', 'Romney':'red'}
+
+election['color'] = election['winner'].map(red_vs_blue)
+```
+
+`z-score` is the number of standard deviations by which an observation is above the mean - so if it is negative, it means the observation is below the mean.
+
+```
+from scipy.stats import zscore
+
+zscore = zscore(df['col_1'])
+```
+
+A list comprehension is a succinct way to generate a list in one line. For example, the following list comprehension generates a list that contains the cubes of all numbers from 0 to 9:
+
+```
+cubes = [i**3 for i in range(10)]
+```
+
+This is equivalent to the following code:
+
+```
+cubes = []
+for i in range(10):
+    cubes.append(i**3)
+```
+
+So, you can do this with dataframe data en masse as well:
+
+```
+new_values = [i.upper() for i in sales.col_1]
+```
+
+You can name both columns and index in a Dataframe:
+
+```
+df.columns.name
+df.index.name
+```
+
+Not entirely sure how to use that but we will see.
+
+You can set multiple indexes (called a tuple):
+
+```
+sales.set_index(['state', 'month'])
+```
+
+This creates grouping and looks like this:
+
+```
+             eggs  salt  spam
+state month                  
+CA    1        47  12.0    17
+      2       110  50.0    31
+NY    1       221  89.0    72
+      2        77  87.0    20
+TX    1       132   NaN    52
+      2       205  60.0    55
+```
+
+To filter on an index value:
+
+```
+df.loc['index_value']
+```
+
+When working with tuple indexes, you need to use this format:
+
+```
+df.loc[('value1', number1)]
+```
+
+Where the things inside the `()` are the values you want to filter by in the MultiIndex.
+
+If you want to filter on a list of things in the index:
+
+```
+df.loc[(['val1', 'val3'], 2), :]
+```
+
+Just discovered `.pivot`, here is an example given this dataset:
+
+```
+  weekday    city  visitors  signups
+0     Sun  Austin       139        7
+1     Sun  Dallas       237       12
+2     Mon  Austin       326        3
+3     Mon  Dallas       456        5
+```
+
+What I want is rows indexed by 'weekday', the columns indexed by 'city', and the values populated with 'visitors', here is how:
+
+```
+df.pivot(index='weekday', columns='city', values='visitors')
+```
+
+This outputs:
+
+```
+city     Austin  Dallas
+weekday                
+Mon         326     456
+Sun         139     237
+```
+
+if you omit `values=`, then it will create a dataframe with a `MultiIndex` and all other columns will be pivoted.
+
+`.stack` and `.unstack` can be used to "unpack" MultiIndexes, not entirely sure how to use this yet but is an interesting method to play with. Here is an example:
+
+```
+df.stack(level='col_2')
+```
+
+`.swaplevel('index1', 'index2')` can be used to swap MultiIndexes
+
+`.sort_index()` can be used to sort or group MultiIndexes
+
+`.reset_index()` resets the index of the DataFrame, and use the default one instead. If the DataFrame has a MultiIndex, this method can remove one or more levels.
+
+`.melt` this is used for changing a pivot view back to a flat view, again not sure where I will use this but here is an example:
+
+Example dataframe:
+
+```
+city weekday  Austin  Dallas
+0        Mon     326     456
+1        Sun     139     237
+```
+
+I want to change city to per row, I use this:
+
+```
+pd.melt(visitors_by_city_weekday, id_vars=['weekday'], value_name='visitors')
+```
+
+and get this:
+
+```
+  weekday    city  visitors
+0     Mon  Austin       326
+1     Sun  Austin       139
+2     Mon  Dallas       456
+3     Sun  Dallas       237
+```
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Manipulating dataframes with Pandas](https://campus.datacamp.com/courses/manipulating-dataframes-with-pandas)
+
+### Day 79 to 83 November 22, 2019
 
 **Today's Progress**
 
