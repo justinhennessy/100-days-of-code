@@ -32,6 +32,176 @@ None.
 
 **Link to work/resources:**
 
+### Day 88 to 91 November 30, 2019
+
+**Today's Progress**
+
+So another one bites the dust, and my mind has literally impoded with the possibilities!
+
+![](images/datacamp_manipulating_data_with_pandas.png)
+
+Here are a bunch of things I have learnt in this course, a heap of practice is needed to see where I can better leverage Pandas.
+
+Using groupby and unstack for visualisation:
+
+```
+# Create the DataFrame: usa
+usa = medals[medals.NOC == 'USA']
+
+# Group usa by 'Edition', 'Medal', and 'Athlete'
+usa_medals_by_year = usa.groupby(['Edition', 'Medal'])['Athlete'].count()
+
+# Reshape usa_medals_by_year by unstacking
+usa_medals_by_year = usa_medals_by_year.unstack(level='Medal')
+
+# Create an area plot of usa_medals_by_year
+usa_medals_by_year.plot.area()
+plt.show()
+```
+
+```
+# Create the DataFrame: usa
+usa = medals[medals.NOC == 'USA']
+
+# Group usa by ['Edition', 'Medal'] and aggregate over 'Athlete'
+usa_medals_by_year = usa.groupby(['Edition', 'Medal'])['Athlete'].count()
+
+# Reshape usa_medals_by_year by unstacking
+usa_medals_by_year = usa_medals_by_year.unstack(level='Medal')
+
+# Plot the DataFrame usa_medals_by_year
+usa_medals_by_year.plot()
+plt.show()
+```
+
+`.idxmax(axis='columns')`
+
+`.idxmin(axis='columns')`
+
+`medals.NOC.isin(['USA', 'URS'])`
+
+`.drop_duplicates()` -  can be used to drop dupes from a single feature or multiple
+
+Use a pivot table to transform 
+
+```
+# Construct the pivot table: counted
+counted = medals.pivot_table(index='NOC', values='Athlete', columns='Medal', aggfunc='count')
+
+# Create the new column: counted['totals']
+counted['totals'] = counted.sum(axis='columns')
+
+# Sort counted by the 'totals' column
+counted = counted.sort_values('totals', ascending=False)
+```
+
+Create custom labels or bins for your data, then you can group by it and get aggregates:
+
+```
+# Create the Boolean Series: under10
+under10 = (titanic['age'] < 10).map({True:'under 10', False:'over 10'})
+
+# Group by under10 and compute the survival rate
+survived_mean_1 = titanic.groupby(under10)['survived'].mean()
+print(survived_mean_1)
+
+# Group by under10 and pclass and compute the survival rate
+survived_mean_2 = titanic.groupby([under10, 'pclass'])['survived'].mean()
+print(survived_mean_2)
+```
+
+`.filter` - used to filter a dataframe that has been grouped:
+
+```
+by_company = sales.groupby('Company')
+
+# Filter 'Units' where the sum is > 35: by_com_filt
+by_com_filt = by_company.filter(lambda g:g['Units'].sum() > 35)
+```
+
+Using the `.apply` method:
+
+```
+# Group gapminder_2010 by 'region': regional
+regional = gapminder_2010.groupby('region')
+
+# Apply the disparity function on regional: reg_disp
+reg_disp = regional.apply(disparity)
+```
+
+So, this enables you to group your data by a feature, then perform complex actions on one or many features and return the results.
+
+This example, shows how to use transform to get a dataframe returned with certain columns transformed but grouped by another field:
+
+```
+# Import zscore
+from scipy.stats import zscore
+
+# Group gapminder_2010: standardized
+standardized = gapminder_2010.groupby('region')['life','fertility'].transform(zscore)
+
+# Construct a Boolean Series to identify outliers: outliers
+outliers = (standardized['life'] < -3) | (standardized['fertility'] > 3)
+
+# Filter gapminder_2010 by the outliers: gm_outliers
+gm_outliers = gapminder_2010.loc[outliers]
+```
+
+Using the `.agg` method to get aggregates for all rows:
+
+```
+df.agg(['max', 'median'])
+```
+
+This can be used when you have a grouped by and aggregated dataframe:
+
+```
+Out[7]: 
+         age             fare         
+         max median       max   median
+pclass                                
+1       80.0   39.0  512.3292  60.0000
+2       70.0   29.0   73.5000  15.0458
+3       74.0   24.0   69.5500   8.0500
+```
+
+```
+df.loc[:, ('age','max')
+```
+
+Aggregating different features with a different method including custom:
+
+```
+# Define the function to compute spread: spread
+def spread(series):
+    return series.max() - series.min()
+
+# Create the dictionary: aggregator
+aggregator = {'population':'sum', 'child_mortality':'mean', 'gdp':spread}
+
+# Aggregate by_year_region using the dictionary: aggregated
+aggregated = by_year_region.agg(aggregator)
+```
+
+This is pure magic and needs more investigation but it looks like it can take a date column and turn it into a aggreage (ie day) and then group by that 🤯
+
+```
+# Read file: sales
+sales = pd.read_csv('sales.csv', index_col='Date', parse_dates=True)
+
+# Create a groupby object: by_day
+by_day = sales.groupby(sales.index.strftime('%a'))
+
+# Create sum: units_sum
+units_sum = by_day['Units'].sum()
+```
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
 ### Day 84 to 87 November 26, 2019
 
 **Today's Progress**
