@@ -32,6 +32,39 @@ None.
 
 **Link to work/resources:**
 
+### Day 92 to 98 November 7, 2019
+
+**Today's Progress**
+
+I have been working through a new course, working with time series data because I can see huge potential for using that day to do for things like logging etc on my works platform.
+
+`.asfreq('D')` use this to up or downsample time series data
+
+I realised for my current use case that treating the data as time series doesn't work so I have gone back to interacting with my data data as a normal feature.
+
+So the majority of the work has been trying to mould the cases data into a one liner for each live customer. So a problem I identified early on was what do I do with cancelled customers, how to I make sure they have data associated with them because the aggregation window is moving. So I am working on using the customers canceldate and working backwards from there to get the weekly, monthly, quarterly data.
+
+The other powerful method I have been using is `.agg`, as you can see from the example, not only can you use standard functions to aggregate like sum and median but you can also create customer functions which you can pass in which works on every row, really powerful stuff.
+
+
+```
+# 90th Percentile
+def p90(x):
+    return x.quantile(0.9)
+
+df.loc[df.date > month_ago].groupby(['n_number']).agg(['sum', 'mean', 'median', p90])
+```
+
+For the momment, given I am so close to finishing my 100 days of code, I have stopped learning more abut Panadas because I was struggling to use what I had learnt, that is what ill do on going is use it more then do more study down the track once I have mastered what I have already learnt.
+
+**Thoughts:**
+
+None.
+
+**Link to work/resources:**
+
+[Manipulating time series data in python](https://campus.datacamp.com/courses/manipulating-time-series-data-in-python/working-with-time-series-in-pandas)
+
 ### Day 88 to 91 November 30, 2019
 
 **Today's Progress**
