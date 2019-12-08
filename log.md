@@ -22,15 +22,23 @@ Interpretations:
 * Partial dependance plots. How do features related to each other? Ie if we increase the days elapsed keeping all other features fixed, how does it affect the probability?
 * Explore some predictions with interpretations. Consider creating a spreadsheet of observations for each data point. Where is the model making decisions with noisy data for example?
 
-### Day X Month Y, 2019
+### Day 99 and 100! November 9, 2019
 
 **Today's Progress**
 
-**Thoughts:**
+Well, here we are, 100 days have passed and considering the amount of work that I have done in that time, it is incredible how quickly it has gone.
 
-None.
+My last 2 days have been spent continuing my work on feature engineering, transforming some of my models data into different views so it can be more effective when training the model.
 
-**Link to work/resources:**
+There are a huge number of people I need to thanks but at the risk of missing anyone, I will just say this. Without your support and motivation I would not have made it as far as I have down this path.
+
+The work will continue, the best thing about this process is, it has now become a very strong habit, each day is another opportunity to grow and gain more skills in the art of data science and machine learning.
+
+This will not be my last 100 days of X, next year I may do something completely different, we will see.
+
+For those of you that have started a challenge off the back of mine, I am both humbled and inspired at your curiosity and motivation and I am sure you will all make it to the end as I have.
+
+Until next time.
 
 ### Day 92 to 98 November 7, 2019
 
